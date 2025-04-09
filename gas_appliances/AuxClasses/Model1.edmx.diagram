@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cb1cc2b2c5d14f0682f0a969fd12757d" Name="Diagram1">
+        <EntityTypeShape EntityType="gas_applliancesModel.Appliance" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gas_applliancesModel.ApplianceCheck" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gas_applliancesModel.Category" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gas_applliancesModel.Owners" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gas_applliancesModel.Roles" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gas_applliancesModel.Statuses" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gas_applliancesModel.Users" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <AssociationConnector Association="gas_applliancesModel.FK__Appliance__Appli__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="gas_applliancesModel.FK__Appliance__Appli__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="gas_applliancesModel.FK__Appliance__Categ__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="gas_applliancesModel.FK__Appliance__Statu__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="gas_applliancesModel.FK__Appliance__UserI__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="gas_applliancesModel.FK__Users__RoleId__45F365D3" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

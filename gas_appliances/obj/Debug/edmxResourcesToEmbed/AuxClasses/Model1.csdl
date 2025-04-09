@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gas_applliancesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Appliance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="ApplianceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ApplianceAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ApplianceOwnerId" Type="Int32" Nullable="false" />
+    <Property Name="InstalledSince" Type="DateTime" Precision="0" />
+    <Property Name="NextExamination" Type="DateTime" Precision="0" />
+    <Property Name="SerialNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Owners" Relationship="Self.FK__Appliance__Appli__5070F446" FromRole="Appliance" ToRole="Owners" />
+    <NavigationProperty Name="ApplianceCheck" Relationship="Self.FK__Appliance__Appli__5441852A" FromRole="Appliance" ToRole="ApplianceCheck" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Appliance__Categ__4E88ABD4" FromRole="Appliance" ToRole="Category" />
+    <NavigationProperty Name="Statuses" Relationship="Self.FK__Appliance__Statu__4F7CD00D" FromRole="Appliance" ToRole="Statuses" />
+  </EntityType>
+  <EntityType Name="ApplianceCheck">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ApplianceId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ApplianceId" Type="Int32" Nullable="false" />
+    <Property Name="CheckDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Appliance" Relationship="Self.FK__Appliance__Appli__5441852A" FromRole="ApplianceCheck" ToRole="Appliance" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Appliance__UserI__534D60F1" FromRole="ApplianceCheck" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Appliance" Relationship="Self.FK__Appliance__Categ__4E88ABD4" FromRole="Category" ToRole="Appliance" />
+  </EntityType>
+  <EntityType Name="Owners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OwnerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactInfo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Appliance" Relationship="Self.FK__Appliance__Appli__5070F446" FromRole="Owners" ToRole="Appliance" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleId__45F365D3" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Statuses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Appliance" Relationship="Self.FK__Appliance__Statu__4F7CD00D" FromRole="Statuses" ToRole="Appliance" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ApplianceCheck" Relationship="Self.FK__Appliance__UserI__534D60F1" FromRole="Users" ToRole="ApplianceCheck" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RoleId__45F365D3" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FK__Appliance__Appli__5070F446">
+    <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
+    <End Role="Appliance" Type="Self.Appliance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Owners">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Appliance">
+        <PropertyRef Name="ApplianceOwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appliance__Appli__5441852A">
+    <End Role="Appliance" Type="Self.Appliance" Multiplicity="1" />
+    <End Role="ApplianceCheck" Type="Self.ApplianceCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Appliance">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ApplianceCheck">
+        <PropertyRef Name="ApplianceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appliance__Categ__4E88ABD4">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Appliance" Type="Self.Appliance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Appliance">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appliance__Statu__4F7CD00D">
+    <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+    <End Role="Appliance" Type="Self.Appliance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Statuses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Appliance">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Appliance__UserI__534D60F1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ApplianceCheck" Type="Self.ApplianceCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ApplianceCheck">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__RoleId__45F365D3">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="gas_applliancesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Appliance" EntityType="Self.Appliance" />
+    <EntitySet Name="ApplianceCheck" EntityType="Self.ApplianceCheck" />
+    <EntitySet Name="Category" EntityType="Self.Category" />
+    <EntitySet Name="Owners" EntityType="Self.Owners" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <EntitySet Name="Statuses" EntityType="Self.Statuses" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK__Appliance__Appli__5070F446" Association="Self.FK__Appliance__Appli__5070F446">
+      <End Role="Owners" EntitySet="Owners" />
+      <End Role="Appliance" EntitySet="Appliance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appliance__Appli__5441852A" Association="Self.FK__Appliance__Appli__5441852A">
+      <End Role="Appliance" EntitySet="Appliance" />
+      <End Role="ApplianceCheck" EntitySet="ApplianceCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appliance__Categ__4E88ABD4" Association="Self.FK__Appliance__Categ__4E88ABD4">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Appliance" EntitySet="Appliance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appliance__Statu__4F7CD00D" Association="Self.FK__Appliance__Statu__4F7CD00D">
+      <End Role="Statuses" EntitySet="Statuses" />
+      <End Role="Appliance" EntitySet="Appliance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appliance__UserI__534D60F1" Association="Self.FK__Appliance__UserI__534D60F1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ApplianceCheck" EntitySet="ApplianceCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__RoleId__45F365D3" Association="Self.FK__Users__RoleId__45F365D3">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

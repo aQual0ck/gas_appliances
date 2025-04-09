@@ -1,0 +1,246 @@
+﻿<Page x:Class="gas_appliances.Pages.PageAdmin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:gas_appliances.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageAdmin">
+
+    <Grid>
+        <TabControl>
+            <TabItem Header="Приборы">
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Menu Grid.Row="0">
+                            <MenuItem Name="menuAddAppliance" Header="Добавить" 
+                                      Click="menuAddAppliance_Click"/>
+                            <!--<MenuItem Name="menuReport" Header="Отчет"
+                                      Click="menuReport_Click"/>-->
+                            <MenuItem Name="menuLogOut" Header="Выход"
+                                      Click="menuLogOut_Click"/>
+                        </Menu>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" 
+                                    VerticalAlignment="Center">
+                            <Label Content="Поиск:"/>
+                            <TextBox Width="150" Height="25" Margin="10, 0"
+                                     Name="txbSearchAppliances" 
+                                     TextChanged="txbSearchAppliances_TextChanged"/>
+                            <ComboBox Height="25" Width="150" Name="cmbCategory"
+                                      SelectionChanged="cmbCategory_SelectionChanged"/>
+                            <ComboBox Height="25" Width="150" Name="cmbStatus"
+                                      SelectionChanged="cmbStatus_SelectionChanged"
+                                      Margin="10, 0"/>
+                            <Button Height="25" Width="75" Name="btnRefresh"
+                                    Content="Обновить" Click="btnRefresh_Click"/>
+                        </StackPanel>
+                        <DataGrid Name="dgrAppliances" Grid.Row="2" 
+                                  AutoGenerateColumns="False" IsReadOnly="True" 
+                                  MouseDoubleClick="dgrAppliances_MouseDoubleClick">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Категория" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock DataContext="{Binding Path=Category}">
+                                                <TextBlock.Text>
+                                                    <Binding Path="CategoryName"/>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Прибор" Binding="{Binding ApplianceName}"
+                                                    Width="*"/>
+                                <DataGridTemplateColumn Header="Статус" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock DataContext="{Binding Path=Statuses}">
+                                                <TextBlock.Text>
+                                                    <Binding Path="StatusName"/>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Владелец" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock DataContext="{Binding Path=Owners}">
+                                                <TextBlock.Text>
+                                                    <Binding Path="OwnerName"/>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="В экспл." 
+                                                    Binding="{Binding InstalledSince, StringFormat=d}" 
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="След. проверка" 
+                                                    Binding="{Binding NextExamination, StringFormat=d}"
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Серийный номер" 
+                                                    Binding="{Binding SerialNumber}"
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Заметки" 
+                                                    Binding="{Binding Notes}"
+                                                    Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Header="Владельцы">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Menu Grid.Row="0">
+                        <MenuItem Name="menuAddOwner" Header="Добавить" 
+                                  Click="menuAddOwner_Click"/>
+                        <MenuItem Name="menuLogOut1" Header="Выход"
+                                  Click="menuLogOut_Click"/>
+                    </Menu>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" 
+                                VerticalAlignment="Center">
+                        <Label Content="Поиск:"/>
+                        <TextBox Width="150" Height="25" Margin="10, 0"
+                                 Name="txbSearchOwners" 
+                                 TextChanged="txbSearchOwners_TextChanged"/>
+                        <Button Height="25" Width="75" Name="btnRefresh1"
+                                Content="Обновить" Click="btnRefresh_Click"/>
+                    </StackPanel>
+
+                    <DataGrid Name="dgrOwners" Grid.Row="2" 
+                              AutoGenerateColumns="False" IsReadOnly="True" 
+                              MouseDoubleClick="dgrOwners_MouseDoubleClick">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" 
+                                                Binding="{Binding OwnerName}"
+                                                Width="*"/>
+                            <DataGridTextColumn Header="Контактные данные"
+                                                Binding="{Binding ContactInfo}"
+                                                Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Проверки">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    <Menu Grid.Row="0">
+                        <MenuItem Name="menuAddExam" Header="Добавить" 
+                                  Click="menuAddExam_Click"/>
+                        <MenuItem Name="menuLogOut2" Header="Выход"
+                                  Click="menuLogOut_Click"/>
+                    </Menu>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" 
+                                VerticalAlignment="Center">
+                        <Button Height="25" Width="75" Name="btnRefresh2"
+                                Content="Обновить" Click="btnRefresh2_Click"/>
+                    </StackPanel>
+
+                    <DataGrid Name="dgrExam" Grid.Row="2" 
+                              AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Проверяющий" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock DataContext="{Binding Path=Users}">
+                                            <TextBlock.Text>
+                                                <Binding Path="FullName"/>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Прибор" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock DataContext="{Binding Path=Appliance}">
+                                            <TextBlock.Text>
+                                                <Binding Path="ApplianceName"/>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Дата проверки" 
+                                                Binding="{Binding CheckDate, StringFormat=d}"
+                                                Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Пользователи">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Menu Grid.Row="0">
+                        <MenuItem Name="menuAddUser" Header="Добавить" 
+                                  Click="menuAddUser_Click"/>
+                        <MenuItem Name="menuLogOut3" Header="Выход"
+                                  Click="menuLogOut_Click"/>
+                    </Menu>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" 
+                                VerticalAlignment="Center">
+                        <Label Content="Поиск:"/>
+                        <TextBox Width="150" Height="25" Margin="10, 0"
+                                 Name="txbSearchUsers" 
+                                 TextChanged="txbSearchUsers_TextChanged"/>
+                        <ComboBox Width="150" Height="25" Name="cmbRole"
+                                  SelectionChanged="cmbRole_SelectionChanged"/>
+                        <Button Height="25" Width="75" Name="btnRefresh3"
+                                Content="Обновить" Click="btnRefresh_Click" 
+                                Margin="10, 0"/>
+                    </StackPanel>
+                    <DataGrid Name="dgrUsers" Grid.Row="2" 
+                              AutoGenerateColumns="False" IsReadOnly="True" 
+                              MouseDoubleClick="dgrUsers_MouseDoubleClick">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding FullName}"
+                                                Width="*"/>
+                            <DataGridTextColumn Header="Логин" Binding="{Binding Username}"
+                                                Width="*"/>
+                            <DataGridTextColumn Header="Пароль" Binding="{Binding Password}"
+                                                Width="*"/>
+                            <DataGridTemplateColumn Header="Категория" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock DataContext="{Binding Path=Roles}">
+                                            <TextBlock.Text>
+                                                <Binding Path="RoleName"/>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

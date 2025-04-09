@@ -1,0 +1,73 @@
+﻿<Page x:Class="gas_appliances.Pages.PageAddAppliance"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:gas_appliances.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageAddAppliance">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="430"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" VerticalAlignment="Center">
+            <MenuItem Header="Назад" Click="MenuItem_Click"/>
+        </Menu>
+        <Rectangle Width="350" Height="400" Fill="White" Stroke="#666666" 
+                   Grid.Row="1"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Категория:" Width="150"/>
+                <ComboBox Name="cmbCategory" Width="150" Height="20" Margin="5, 5, 0, 5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Статус:" Width="150"/>
+                <ComboBox Name="cmbStatus" Width="150" Height="20" Margin="5, 5, 0, 5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Прибор:" Width="150"/>
+                <TextBox Name="txbApplianceName" Width="150" Margin="5, 5, 0, 5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Адрес:" Width="150"/>
+                <TextBox Name="txbApplianceAddress" Width="150" Margin="5, 5, 0, 5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Владелец:" Width="150"/>
+                <ComboBox Name="cmbOwner" Width="150" Height="20" Margin="5, 5, 0, 5"
+                          IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                          TextBoxBase.TextChanged="cmbOwner_TextChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="В эксплуатации с:" Width="150"/>
+                <DatePicker Name="dpInstalled" Width="150" Margin="5, 5, 0, 5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Следующая проверка:" Width="150"/>
+                <DatePicker Name="dpNextExam" Width="150" Margin="5, 5, 0, 5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Серийный номер:" Width="150"/>
+                <TextBox Name="txbSN" Width="150" Margin="5, 5, 0, 5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Заметки:" Width="150"/>
+                <TextBox Name="txbNotes" Width="150" Height="100" Margin="5, 5, 0, 5"/>
+            </StackPanel>
+
+            <Button Name="btnSave" Content="Сохранить" Click="btnSave_Click"
+                    Width="75">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>
