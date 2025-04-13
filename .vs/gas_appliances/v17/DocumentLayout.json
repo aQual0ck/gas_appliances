@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "F:\\source\\gas_appliances\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|f:\\source\\gas_appliances\\gas_appliances\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
@@ -28,7 +28,7 @@
               "RelativeDocumentMoniker": "gas_appliances\\App.config",
               "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\App.config",
               "RelativeToolTip": "gas_appliances\\App.config",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAALAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAABxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
               "WhenOpened": "2025-04-09T19:42:26.115Z",
               "EditorCaption": ""
