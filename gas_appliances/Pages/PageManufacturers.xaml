@@ -40,7 +40,7 @@
                   AutoGenerateColumns="False" IsReadOnly="True" 
                   MouseDoubleClick="dgrManufacturers_MouseDoubleClick">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название" 
+                <DataGridTextColumn Header="Наименование" 
                                     Binding="{Binding ManufacturerName}" 
                                     Width="*"/>
                 <DataGridTemplateColumn Header="Тип" Width="auto">

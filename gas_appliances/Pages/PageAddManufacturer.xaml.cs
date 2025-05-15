@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace gas_appliances.Pages
 {
@@ -23,6 +24,30 @@ namespace gas_appliances.Pages
         public PageAddManufacturer()
         {
             InitializeComponent();
+            cmbType.SelectedValuePath = "ManufacturerTypeName";
+            cmbType.DisplayMemberPath = "ManufacturerTypeName";
+            cmbType.ItemsSource = AuxClasses.DBClass.entObj.ToolManufacturerType.ToList();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            AuxClasses.FrameClass.frmObj.GoBack();
+        }
+
+        private AuxClasses.ToolManufacturer tm;
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            int typeid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbType.SelectionBoxItem)["Id"].GetValue(cmbType.SelectionBoxItem));
+            tm = new AuxClasses.ToolManufacturer()
+            {
+                ManufacturerName = txbManufacturerName.Text,
+                ManufacturerTypeId = typeid,
+                ContactInfo = txbContactInfo.Text,
+                RepresentativeName = txbRepName.Text
+            };
+            AuxClasses.DBClass.entObj.ToolManufacturer.Add(tm);
+            AuxClasses.DBClass.entObj.SaveChanges();
+            MessageBox.Show("Добавлено");
         }
     }
 }
