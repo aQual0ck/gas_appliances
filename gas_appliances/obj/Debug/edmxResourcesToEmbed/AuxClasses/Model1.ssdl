@@ -53,6 +53,63 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tool">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="ModelName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="OperatingSince" Type="date" />
+    <Property Name="NextExamination" Type="date" />
+    <Property Name="DecomissionedSince" Type="date" />
+    <Property Name="ManufacturerId" Type="int" Nullable="false" />
+    <Property Name="SerialNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="ToolCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ToolCategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ToolCheck">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ToolId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ToolId" Type="int" Nullable="false" />
+    <Property Name="CheckDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ToolManufacturer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ManufacturerName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ManufacturerTypeId" Type="int" Nullable="false" />
+    <Property Name="ContactInfo" Type="nvarchar" MaxLength="100" />
+    <Property Name="RepresentativeName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ToolManufacturerType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ManufacturerTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="Id" />
@@ -123,6 +180,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Tool__CategoryId__6383C8BA">
+    <End Role="ToolCategory" Type="Self.ToolCategory" Multiplicity="1" />
+    <End Role="Tool" Type="Self.Tool" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ToolCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tool">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tool__Manufactur__6477ECF3">
+    <End Role="ToolManufacturer" Type="Self.ToolManufacturer" Multiplicity="1" />
+    <End Role="Tool" Type="Self.Tool" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ToolManufacturer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tool">
+        <PropertyRef Name="ManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ToolCheck__ToolI__68487DD7">
+    <End Role="Tool" Type="Self.Tool" Multiplicity="1" />
+    <End Role="ToolCheck" Type="Self.ToolCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tool">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ToolCheck">
+        <PropertyRef Name="ToolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ToolCheck__UserI__6754599E">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ToolCheck" Type="Self.ToolCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ToolCheck">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ToolManuf__Manuf__60A75C0F">
+    <End Role="ToolManufacturerType" Type="Self.ToolManufacturerType" Multiplicity="1" />
+    <End Role="ToolManufacturer" Type="Self.ToolManufacturer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ToolManufacturerType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ToolManufacturer">
+        <PropertyRef Name="ManufacturerTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Users__RoleId__45F365D3">
     <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
     <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -142,6 +259,12 @@
     <EntitySet Name="Owners" EntityType="Self.Owners" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tool" EntityType="Self.Tool" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ToolCategory" EntityType="Self.ToolCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ToolCheck" EntityType="Self.ToolCheck" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ToolManufacturer" EntityType="Self.ToolManufacturer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ToolManufacturerType" EntityType="Self.ToolManufacturerType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Appliance__Appli__5070F446" Association="Self.FK__Appliance__Appli__5070F446">
       <End Role="Owners" EntitySet="Owners" />
@@ -162,6 +285,26 @@
     <AssociationSet Name="FK__Appliance__UserI__534D60F1" Association="Self.FK__Appliance__UserI__534D60F1">
       <End Role="Users" EntitySet="Users" />
       <End Role="ApplianceCheck" EntitySet="ApplianceCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tool__CategoryId__6383C8BA" Association="Self.FK__Tool__CategoryId__6383C8BA">
+      <End Role="ToolCategory" EntitySet="ToolCategory" />
+      <End Role="Tool" EntitySet="Tool" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tool__Manufactur__6477ECF3" Association="Self.FK__Tool__Manufactur__6477ECF3">
+      <End Role="ToolManufacturer" EntitySet="ToolManufacturer" />
+      <End Role="Tool" EntitySet="Tool" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ToolCheck__ToolI__68487DD7" Association="Self.FK__ToolCheck__ToolI__68487DD7">
+      <End Role="Tool" EntitySet="Tool" />
+      <End Role="ToolCheck" EntitySet="ToolCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ToolCheck__UserI__6754599E" Association="Self.FK__ToolCheck__UserI__6754599E">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ToolCheck" EntitySet="ToolCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ToolManuf__Manuf__60A75C0F" Association="Self.FK__ToolManuf__Manuf__60A75C0F">
+      <End Role="ToolManufacturerType" EntitySet="ToolManufacturerType" />
+      <End Role="ToolManufacturer" EntitySet="ToolManufacturer" />
     </AssociationSet>
     <AssociationSet Name="FK__Users__RoleId__45F365D3" Association="Self.FK__Users__RoleId__45F365D3">
       <End Role="Roles" EntitySet="Roles" />

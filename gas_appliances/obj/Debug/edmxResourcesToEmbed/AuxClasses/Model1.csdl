@@ -1,5 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="gas_applliancesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="gas_applliancesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Appliance" EntityType="gas_applliancesModel.Appliance" />
+    <EntitySet Name="ApplianceCheck" EntityType="gas_applliancesModel.ApplianceCheck" />
+    <EntitySet Name="Category" EntityType="gas_applliancesModel.Category" />
+    <EntitySet Name="Owners" EntityType="gas_applliancesModel.Owners" />
+    <EntitySet Name="Roles" EntityType="gas_applliancesModel.Roles" />
+    <EntitySet Name="Statuses" EntityType="gas_applliancesModel.Statuses" />
+    <EntitySet Name="sysdiagrams" EntityType="gas_applliancesModel.sysdiagrams" />
+    <EntitySet Name="Tool" EntityType="gas_applliancesModel.Tool" />
+    <EntitySet Name="ToolCategory" EntityType="gas_applliancesModel.ToolCategory" />
+    <EntitySet Name="ToolCheck" EntityType="gas_applliancesModel.ToolCheck" />
+    <EntitySet Name="ToolManufacturer" EntityType="gas_applliancesModel.ToolManufacturer" />
+    <EntitySet Name="ToolManufacturerType" EntityType="gas_applliancesModel.ToolManufacturerType" />
+    <EntitySet Name="Users" EntityType="gas_applliancesModel.Users" />
+    <AssociationSet Name="FK__Appliance__Appli__5070F446" Association="gas_applliancesModel.FK__Appliance__Appli__5070F446">
+      <End Role="Owners" EntitySet="Owners" />
+      <End Role="Appliance" EntitySet="Appliance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appliance__Appli__5441852A" Association="gas_applliancesModel.FK__Appliance__Appli__5441852A">
+      <End Role="Appliance" EntitySet="Appliance" />
+      <End Role="ApplianceCheck" EntitySet="ApplianceCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appliance__Categ__4E88ABD4" Association="gas_applliancesModel.FK__Appliance__Categ__4E88ABD4">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Appliance" EntitySet="Appliance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appliance__Statu__4F7CD00D" Association="gas_applliancesModel.FK__Appliance__Statu__4F7CD00D">
+      <End Role="Statuses" EntitySet="Statuses" />
+      <End Role="Appliance" EntitySet="Appliance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Appliance__UserI__534D60F1" Association="gas_applliancesModel.FK__Appliance__UserI__534D60F1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ApplianceCheck" EntitySet="ApplianceCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__RoleId__45F365D3" Association="gas_applliancesModel.FK__Users__RoleId__45F365D3">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tool__CategoryId__6383C8BA" Association="gas_applliancesModel.FK__Tool__CategoryId__6383C8BA">
+      <End Role="ToolCategory" EntitySet="ToolCategory" />
+      <End Role="Tool" EntitySet="Tool" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tool__Manufactur__6477ECF3" Association="gas_applliancesModel.FK__Tool__Manufactur__6477ECF3">
+      <End Role="ToolManufacturer" EntitySet="ToolManufacturer" />
+      <End Role="Tool" EntitySet="Tool" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ToolCheck__ToolI__68487DD7" Association="gas_applliancesModel.FK__ToolCheck__ToolI__68487DD7">
+      <End Role="Tool" EntitySet="Tool" />
+      <End Role="ToolCheck" EntitySet="ToolCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ToolCheck__UserI__6754599E" Association="gas_applliancesModel.FK__ToolCheck__UserI__6754599E">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ToolCheck" EntitySet="ToolCheck" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ToolManuf__Manuf__60A75C0F" Association="gas_applliancesModel.FK__ToolManuf__Manuf__60A75C0F">
+      <End Role="ToolManufacturerType" EntitySet="ToolManufacturerType" />
+      <End Role="ToolManufacturer" EntitySet="ToolManufacturer" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="Appliance">
     <Key>
       <PropertyRef Name="Id" />
@@ -7,17 +66,17 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CategoryId" Type="Int32" Nullable="false" />
     <Property Name="StatusId" Type="Int32" Nullable="false" />
-    <Property Name="ApplianceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ApplianceAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ApplianceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ApplianceAddress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="ApplianceOwnerId" Type="Int32" Nullable="false" />
     <Property Name="InstalledSince" Type="DateTime" Precision="0" />
     <Property Name="NextExamination" Type="DateTime" Precision="0" />
     <Property Name="SerialNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Owners" Relationship="Self.FK__Appliance__Appli__5070F446" FromRole="Appliance" ToRole="Owners" />
-    <NavigationProperty Name="ApplianceCheck" Relationship="Self.FK__Appliance__Appli__5441852A" FromRole="Appliance" ToRole="ApplianceCheck" />
-    <NavigationProperty Name="Category" Relationship="Self.FK__Appliance__Categ__4E88ABD4" FromRole="Appliance" ToRole="Category" />
-    <NavigationProperty Name="Statuses" Relationship="Self.FK__Appliance__Statu__4F7CD00D" FromRole="Appliance" ToRole="Statuses" />
+    <NavigationProperty Name="Owners" Relationship="gas_applliancesModel.FK__Appliance__Appli__5070F446" FromRole="Appliance" ToRole="Owners" />
+    <NavigationProperty Name="ApplianceCheck" Relationship="gas_applliancesModel.FK__Appliance__Appli__5441852A" FromRole="Appliance" ToRole="ApplianceCheck" />
+    <NavigationProperty Name="Category" Relationship="gas_applliancesModel.FK__Appliance__Categ__4E88ABD4" FromRole="Appliance" ToRole="Category" />
+    <NavigationProperty Name="Statuses" Relationship="gas_applliancesModel.FK__Appliance__Statu__4F7CD00D" FromRole="Appliance" ToRole="Statuses" />
   </EntityType>
   <EntityType Name="ApplianceCheck">
     <Key>
@@ -27,57 +86,124 @@
     <Property Name="UserId" Type="Int32" Nullable="false" />
     <Property Name="ApplianceId" Type="Int32" Nullable="false" />
     <Property Name="CheckDate" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="Appliance" Relationship="Self.FK__Appliance__Appli__5441852A" FromRole="ApplianceCheck" ToRole="Appliance" />
-    <NavigationProperty Name="Users" Relationship="Self.FK__Appliance__UserI__534D60F1" FromRole="ApplianceCheck" ToRole="Users" />
+    <NavigationProperty Name="Appliance" Relationship="gas_applliancesModel.FK__Appliance__Appli__5441852A" FromRole="ApplianceCheck" ToRole="Appliance" />
+    <NavigationProperty Name="Users" Relationship="gas_applliancesModel.FK__Appliance__UserI__534D60F1" FromRole="ApplianceCheck" ToRole="Users" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Appliance" Relationship="Self.FK__Appliance__Categ__4E88ABD4" FromRole="Category" ToRole="Appliance" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Appliance" Relationship="gas_applliancesModel.FK__Appliance__Categ__4E88ABD4" FromRole="Category" ToRole="Appliance" />
   </EntityType>
   <EntityType Name="Owners">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="OwnerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OwnerName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="ContactInfo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Appliance" Relationship="Self.FK__Appliance__Appli__5070F446" FromRole="Owners" ToRole="Appliance" />
+    <NavigationProperty Name="Appliance" Relationship="gas_applliancesModel.FK__Appliance__Appli__5070F446" FromRole="Owners" ToRole="Appliance" />
   </EntityType>
   <EntityType Name="Roles">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleId__45F365D3" FromRole="Roles" ToRole="Users" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="gas_applliancesModel.FK__Users__RoleId__45F365D3" FromRole="Roles" ToRole="Users" />
   </EntityType>
   <EntityType Name="Statuses">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Appliance" Relationship="Self.FK__Appliance__Statu__4F7CD00D" FromRole="Statuses" ToRole="Appliance" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Appliance" Relationship="gas_applliancesModel.FK__Appliance__Statu__4F7CD00D" FromRole="Statuses" ToRole="Appliance" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tool">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="ModelName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="OperatingSince" Type="DateTime" Precision="0" />
+    <Property Name="NextExamination" Type="DateTime" Precision="0" />
+    <Property Name="DecomissionedSince" Type="DateTime" Precision="0" />
+    <Property Name="ManufacturerId" Type="Int32" Nullable="false" />
+    <Property Name="SerialNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ToolCategory" Relationship="gas_applliancesModel.FK__Tool__CategoryId__6383C8BA" FromRole="Tool" ToRole="ToolCategory" />
+    <NavigationProperty Name="ToolManufacturer" Relationship="gas_applliancesModel.FK__Tool__Manufactur__6477ECF3" FromRole="Tool" ToRole="ToolManufacturer" />
+    <NavigationProperty Name="ToolCheck" Relationship="gas_applliancesModel.FK__ToolCheck__ToolI__68487DD7" FromRole="Tool" ToRole="ToolCheck" />
+  </EntityType>
+  <EntityType Name="ToolCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ToolCategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tool" Relationship="gas_applliancesModel.FK__Tool__CategoryId__6383C8BA" FromRole="ToolCategory" ToRole="Tool" />
+  </EntityType>
+  <EntityType Name="ToolCheck">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ToolId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ToolId" Type="Int32" Nullable="false" />
+    <Property Name="CheckDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Tool" Relationship="gas_applliancesModel.FK__ToolCheck__ToolI__68487DD7" FromRole="ToolCheck" ToRole="Tool" />
+    <NavigationProperty Name="Users" Relationship="gas_applliancesModel.FK__ToolCheck__UserI__6754599E" FromRole="ToolCheck" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="ToolManufacturer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ManufacturerName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ManufacturerTypeId" Type="Int32" Nullable="false" />
+    <Property Name="ContactInfo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="RepresentativeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tool" Relationship="gas_applliancesModel.FK__Tool__Manufactur__6477ECF3" FromRole="ToolManufacturer" ToRole="Tool" />
+    <NavigationProperty Name="ToolManufacturerType" Relationship="gas_applliancesModel.FK__ToolManuf__Manuf__60A75C0F" FromRole="ToolManufacturer" ToRole="ToolManufacturerType" />
+  </EntityType>
+  <EntityType Name="ToolManufacturerType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ManufacturerTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ToolManufacturer" Relationship="gas_applliancesModel.FK__ToolManuf__Manuf__60A75C0F" FromRole="ToolManufacturerType" ToRole="ToolManufacturer" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Username" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="FullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="RoleId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ApplianceCheck" Relationship="Self.FK__Appliance__UserI__534D60F1" FromRole="Users" ToRole="ApplianceCheck" />
-    <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RoleId__45F365D3" FromRole="Users" ToRole="Roles" />
+    <NavigationProperty Name="ApplianceCheck" Relationship="gas_applliancesModel.FK__Appliance__UserI__534D60F1" FromRole="Users" ToRole="ApplianceCheck" />
+    <NavigationProperty Name="Roles" Relationship="gas_applliancesModel.FK__Users__RoleId__45F365D3" FromRole="Users" ToRole="Roles" />
+    <NavigationProperty Name="ToolCheck" Relationship="gas_applliancesModel.FK__ToolCheck__UserI__6754599E" FromRole="Users" ToRole="ToolCheck" />
   </EntityType>
   <Association Name="FK__Appliance__Appli__5070F446">
-    <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
-    <End Role="Appliance" Type="Self.Appliance" Multiplicity="*" />
+    <End Type="gas_applliancesModel.Owners" Role="Owners" Multiplicity="1" />
+    <End Type="gas_applliancesModel.Appliance" Role="Appliance" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Owners">
         <PropertyRef Name="Id" />
@@ -88,8 +214,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Appliance__Appli__5441852A">
-    <End Role="Appliance" Type="Self.Appliance" Multiplicity="1" />
-    <End Role="ApplianceCheck" Type="Self.ApplianceCheck" Multiplicity="*" />
+    <End Type="gas_applliancesModel.Appliance" Role="Appliance" Multiplicity="1" />
+    <End Type="gas_applliancesModel.ApplianceCheck" Role="ApplianceCheck" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Appliance">
         <PropertyRef Name="Id" />
@@ -100,8 +226,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Appliance__Categ__4E88ABD4">
-    <End Role="Category" Type="Self.Category" Multiplicity="1" />
-    <End Role="Appliance" Type="Self.Appliance" Multiplicity="*" />
+    <End Type="gas_applliancesModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="gas_applliancesModel.Appliance" Role="Appliance" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Category">
         <PropertyRef Name="Id" />
@@ -112,8 +238,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Appliance__Statu__4F7CD00D">
-    <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
-    <End Role="Appliance" Type="Self.Appliance" Multiplicity="*" />
+    <End Type="gas_applliancesModel.Statuses" Role="Statuses" Multiplicity="1" />
+    <End Type="gas_applliancesModel.Appliance" Role="Appliance" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Statuses">
         <PropertyRef Name="Id" />
@@ -124,8 +250,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Appliance__UserI__534D60F1">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="ApplianceCheck" Type="Self.ApplianceCheck" Multiplicity="*" />
+    <End Type="gas_applliancesModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="gas_applliancesModel.ApplianceCheck" Role="ApplianceCheck" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -136,8 +262,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Users__RoleId__45F365D3">
-    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <End Type="gas_applliancesModel.Roles" Role="Roles" Multiplicity="1" />
+    <End Type="gas_applliancesModel.Users" Role="Users" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Roles">
         <PropertyRef Name="Id" />
@@ -147,37 +273,64 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="gas_applliancesEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Appliance" EntityType="Self.Appliance" />
-    <EntitySet Name="ApplianceCheck" EntityType="Self.ApplianceCheck" />
-    <EntitySet Name="Category" EntityType="Self.Category" />
-    <EntitySet Name="Owners" EntityType="Self.Owners" />
-    <EntitySet Name="Roles" EntityType="Self.Roles" />
-    <EntitySet Name="Statuses" EntityType="Self.Statuses" />
-    <EntitySet Name="Users" EntityType="Self.Users" />
-    <AssociationSet Name="FK__Appliance__Appli__5070F446" Association="Self.FK__Appliance__Appli__5070F446">
-      <End Role="Owners" EntitySet="Owners" />
-      <End Role="Appliance" EntitySet="Appliance" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Appliance__Appli__5441852A" Association="Self.FK__Appliance__Appli__5441852A">
-      <End Role="Appliance" EntitySet="Appliance" />
-      <End Role="ApplianceCheck" EntitySet="ApplianceCheck" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Appliance__Categ__4E88ABD4" Association="Self.FK__Appliance__Categ__4E88ABD4">
-      <End Role="Category" EntitySet="Category" />
-      <End Role="Appliance" EntitySet="Appliance" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Appliance__Statu__4F7CD00D" Association="Self.FK__Appliance__Statu__4F7CD00D">
-      <End Role="Statuses" EntitySet="Statuses" />
-      <End Role="Appliance" EntitySet="Appliance" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Appliance__UserI__534D60F1" Association="Self.FK__Appliance__UserI__534D60F1">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="ApplianceCheck" EntitySet="ApplianceCheck" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Users__RoleId__45F365D3" Association="Self.FK__Users__RoleId__45F365D3">
-      <End Role="Roles" EntitySet="Roles" />
-      <End Role="Users" EntitySet="Users" />
-    </AssociationSet>
-  </EntityContainer>
+  <Association Name="FK__Tool__CategoryId__6383C8BA">
+    <End Type="gas_applliancesModel.ToolCategory" Role="ToolCategory" Multiplicity="1" />
+    <End Type="gas_applliancesModel.Tool" Role="Tool" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ToolCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tool">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tool__Manufactur__6477ECF3">
+    <End Type="gas_applliancesModel.ToolManufacturer" Role="ToolManufacturer" Multiplicity="1" />
+    <End Type="gas_applliancesModel.Tool" Role="Tool" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ToolManufacturer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tool">
+        <PropertyRef Name="ManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ToolCheck__ToolI__68487DD7">
+    <End Type="gas_applliancesModel.Tool" Role="Tool" Multiplicity="1" />
+    <End Type="gas_applliancesModel.ToolCheck" Role="ToolCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tool">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ToolCheck">
+        <PropertyRef Name="ToolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ToolCheck__UserI__6754599E">
+    <End Type="gas_applliancesModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="gas_applliancesModel.ToolCheck" Role="ToolCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ToolCheck">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ToolManuf__Manuf__60A75C0F">
+    <End Type="gas_applliancesModel.ToolManufacturerType" Role="ToolManufacturerType" Multiplicity="1" />
+    <End Type="gas_applliancesModel.ToolManufacturer" Role="ToolManufacturer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ToolManufacturerType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ToolManufacturer">
+        <PropertyRef Name="ManufacturerTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

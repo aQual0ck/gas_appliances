@@ -4,69 +4,131 @@
     <EntitySetMapping Name="Appliance">
       <EntityTypeMapping TypeName="gas_applliancesModel.Appliance">
         <MappingFragment StoreEntitySet="Appliance">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-          <ScalarProperty Name="ApplianceName" ColumnName="ApplianceName" />
-          <ScalarProperty Name="ApplianceAddress" ColumnName="ApplianceAddress" />
-          <ScalarProperty Name="ApplianceOwnerId" ColumnName="ApplianceOwnerId" />
-          <ScalarProperty Name="InstalledSince" ColumnName="InstalledSince" />
-          <ScalarProperty Name="NextExamination" ColumnName="NextExamination" />
-          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="NextExamination" ColumnName="NextExamination" />
+          <ScalarProperty Name="InstalledSince" ColumnName="InstalledSince" />
+          <ScalarProperty Name="ApplianceOwnerId" ColumnName="ApplianceOwnerId" />
+          <ScalarProperty Name="ApplianceAddress" ColumnName="ApplianceAddress" />
+          <ScalarProperty Name="ApplianceName" ColumnName="ApplianceName" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ApplianceCheck">
       <EntityTypeMapping TypeName="gas_applliancesModel.ApplianceCheck">
         <MappingFragment StoreEntitySet="ApplianceCheck">
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="ApplianceId" ColumnName="ApplianceId" />
           <ScalarProperty Name="CheckDate" ColumnName="CheckDate" />
+          <ScalarProperty Name="ApplianceId" ColumnName="ApplianceId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Category">
       <EntityTypeMapping TypeName="gas_applliancesModel.Category">
         <MappingFragment StoreEntitySet="Category">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Owners">
       <EntityTypeMapping TypeName="gas_applliancesModel.Owners">
         <MappingFragment StoreEntitySet="Owners">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
           <ScalarProperty Name="ContactInfo" ColumnName="ContactInfo" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Roles">
       <EntityTypeMapping TypeName="gas_applliancesModel.Roles">
         <MappingFragment StoreEntitySet="Roles">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Statuses">
       <EntityTypeMapping TypeName="gas_applliancesModel.Statuses">
         <MappingFragment StoreEntitySet="Statuses">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="gas_applliancesModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tool">
+      <EntityTypeMapping TypeName="gas_applliancesModel.Tool">
+        <MappingFragment StoreEntitySet="Tool">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" />
+          <ScalarProperty Name="DecomissionedSince" ColumnName="DecomissionedSince" />
+          <ScalarProperty Name="NextExamination" ColumnName="NextExamination" />
+          <ScalarProperty Name="OperatingSince" ColumnName="OperatingSince" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ToolCategory">
+      <EntityTypeMapping TypeName="gas_applliancesModel.ToolCategory">
+        <MappingFragment StoreEntitySet="ToolCategory">
+          <ScalarProperty Name="ToolCategoryName" ColumnName="ToolCategoryName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ToolCheck">
+      <EntityTypeMapping TypeName="gas_applliancesModel.ToolCheck">
+        <MappingFragment StoreEntitySet="ToolCheck">
+          <ScalarProperty Name="CheckDate" ColumnName="CheckDate" />
+          <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ToolManufacturer">
+      <EntityTypeMapping TypeName="gas_applliancesModel.ToolManufacturer">
+        <MappingFragment StoreEntitySet="ToolManufacturer">
+          <ScalarProperty Name="RepresentativeName" ColumnName="RepresentativeName" />
+          <ScalarProperty Name="ContactInfo" ColumnName="ContactInfo" />
+          <ScalarProperty Name="ManufacturerTypeId" ColumnName="ManufacturerTypeId" />
+          <ScalarProperty Name="ManufacturerName" ColumnName="ManufacturerName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ToolManufacturerType">
+      <EntityTypeMapping TypeName="gas_applliancesModel.ToolManufacturerType">
+        <MappingFragment StoreEntitySet="ToolManufacturerType">
+          <ScalarProperty Name="ManufacturerTypeName" ColumnName="ManufacturerTypeName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="gas_applliancesModel.Users">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

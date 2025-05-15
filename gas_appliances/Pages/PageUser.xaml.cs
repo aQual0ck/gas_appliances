@@ -37,94 +37,6 @@ namespace gas_appliances.Pages
         public PageUser()
         {
             InitializeComponent();
-            dgrAppliances.ItemsSource = AuxClasses.DBClass.entObj.Appliance.ToList();
-            dgrOwners.ItemsSource = AuxClasses.DBClass.entObj.Owners.ToList();
-            dgrExam.ItemsSource = AuxClasses.DBClass.entObj.ApplianceCheck.ToList();
-
-            cmbCategory.SelectedValuePath = "CategoryName";
-            cmbCategory.DisplayMemberPath = "CategoryName";
-            var cat = AuxClasses.DBClass.entObj.Category.ToList();
-            cat.Insert(0, new AuxClasses.Category { Id = 0, CategoryName = "Все категории" });
-            cmbCategory.ItemsSource = cat;
-            cmbCategory.SelectedIndex = 0;
-
-            cmbStatus.SelectedValuePath = "StatusName";
-            cmbStatus.DisplayMemberPath = "StatusName";
-            var stat = AuxClasses.DBClass.entObj.Statuses.ToList();
-            stat.Insert(0, new AuxClasses.Statuses { Id = 0, StatusName = "Все статусы" });
-            cmbStatus.ItemsSource = stat;
-            cmbStatus.SelectedIndex = 0;
-        }
-
-        private void ApplyFilters()
-        {
-            if (cmbCategory.SelectedItem != null)
-                catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectedItem)["Id"].GetValue(cmbCategory.SelectedItem));
-            else
-                catid = 0;
-
-            if (cmbStatus.SelectedItem != null)
-                statid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbStatus.SelectedItem)["Id"].GetValue(cmbStatus.SelectedItem));
-            else
-                statid = 0;
-
-            var queryAppl = AuxClasses.DBClass.entObj.Appliance.AsQueryable();
-            var queryOwner = AuxClasses.DBClass.entObj.Owners.AsQueryable();
-
-            if (catid != 0)
-                queryAppl = queryAppl.Where(x => x.CategoryId == catid);
-
-            if (statid != 0)
-                queryAppl = queryAppl.Where(x => x.StatusId == statid);
-
-            if (!string.IsNullOrEmpty(txbSearchAppliances.Text))
-                queryAppl = queryAppl.Where(x => x.ApplianceName.ToLower().Contains(txbSearchAppliances.Text.ToLower()));
-
-            if (!string.IsNullOrEmpty(txbSearchOwners.Text))
-                queryOwner = queryOwner.Where(x => x.OwnerName.ToLower().Contains(txbSearchOwners.Text.ToLower()));
-
-            dgrAppliances.ItemsSource = queryAppl.ToList();
-            dgrOwners.ItemsSource = queryOwner.ToList();
-        }
-
-        private void txbSearchAppliances_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void menuAddOwner_Click(object sender, RoutedEventArgs e)
-        {
-            AuxClasses.FrameClass.frmObj.Navigate(new PageAddOwner());
-        }
-
-        private void txbSearchOwners_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void dgrOwners_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            AuxClasses.FrameClass.frmObj.Navigate(new PageEditOwner(dgrOwners.SelectedItem));
-        }
-
-        private void menuAddAppliance_Click(object sender, RoutedEventArgs e)
-        {
-            AuxClasses.FrameClass.frmObj.Navigate(new PageAddAppliance());
-        }
-
-        private void cmbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void cmbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void dgrAppliances_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            AuxClasses.FrameClass.frmObj.Navigate(new PageEditAppliance(dgrAppliances.SelectedItem));
         }
 
         //private void menuReport_Click(object sender, RoutedEventArgs e)
@@ -181,25 +93,5 @@ namespace gas_appliances.Pages
         //        MessageBox.Show($"Отчет сохранен по данному пути: {_filepath}");
         //    }
         //}
-
-        private void menuLogOut_Click(object sender, RoutedEventArgs e)
-        {
-            AuxClasses.FrameClass.frmObj.Navigate(new PageLogin());
-        }
-
-        private void menuAddExam_Click(object sender, RoutedEventArgs e)
-        {
-            AuxClasses.FrameClass.frmObj.Navigate(new PageAddExam());
-        }
-
-        private void btnRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            ApplyFilters();
-        }
-
-        private void btnRefresh2_Click(object sender, RoutedEventArgs e)
-        {
-            dgrExam.ItemsSource = AuxClasses.DBClass.entObj.ApplianceCheck.ToList();
-        }
     }
 }
