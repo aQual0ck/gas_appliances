@@ -1,6 +1,9 @@
-﻿using System;
+﻿using gas_appliances.AuxClasses;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +27,8 @@ namespace gas_appliances.Pages
         private AuxClasses.ToolCategory cat;
         private AuxClasses.ToolManufacturer man;
         private AuxClasses.Tool tool;
+        private List<ToolManufacturer> manList;
+        private List<string> manOriginal = new List<string>();
         public PageEditTool(object item)
         {
             InitializeComponent();
@@ -45,12 +50,24 @@ namespace gas_appliances.Pages
 
             cmbManufacturer.SelectedValuePath = "ManufacturerName";
             cmbManufacturer.DisplayMemberPath = "ManufacturerName";
-            cmbManufacturer.ItemsSource = AuxClasses.DBClass.entObj.ToolManufacturer.ToList();
-            cmbManufacturer.SelectedValue = man.ManufacturerName;
+            manList = AuxClasses.DBClass.entObj.ToolManufacturer.ToList();
+            foreach (AuxClasses.ToolManufacturer tm in manList)
+            {
+                manOriginal.Add(tm.ManufacturerName);
+                tm.ManufacturerName = tm.ToolManufacturerType.ManufacturerTypeName + " " + $"\"{tm.ManufacturerName}\"";
+            }
+            cmbManufacturer.ItemsSource = manList;
+            cmbManufacturer.SelectedItem = AuxClasses.DBClass.entObj.ToolManufacturer.FirstOrDefault(x => x.Id == man.Id);
         }
 
         private void menuDel_Click(object sender, RoutedEventArgs e)
         {
+            int id = 0;
+            foreach (AuxClasses.ToolManufacturer tm in manList)
+            {
+                tm.ManufacturerName = manOriginal[id];
+                id++;
+            }
             if (MessageBox.Show("Вы уверены?", "Удаление прибора", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 AuxClasses.DBClass.entObj.Tool.Remove(tool);
@@ -61,8 +78,14 @@ namespace gas_appliances.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            int id = 0;
+            foreach (AuxClasses.ToolManufacturer tm in manList)
+            {
+                tm.ManufacturerName = manOriginal[id];
+                id++;
+            }
             int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectionBoxItem)["Id"].GetValue(cmbCategory.SelectionBoxItem));
-            int manid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbManufacturer.SelectionBoxItem)["Id"].GetValue(cmbManufacturer.SelectionBoxItem));
+            int manid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbManufacturer.SelectedItem)["Id"].GetValue(cmbManufacturer.SelectedItem));
             string dateOp = dpOperating.SelectedDate?.ToString(App.DateFormat);
             DateTime dtOp = DateTime.Parse(dateOp);
             string dateNE = dpNextExam.SelectedDate?.ToString(App.DateFormat);
@@ -86,7 +109,29 @@ namespace gas_appliances.Pages
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            int id = 0;
+            foreach (AuxClasses.ToolManufacturer tm in manList)
+            {
+                tm.ManufacturerName = manOriginal[id];
+                id++;
+            }
             AuxClasses.FrameClass.frmObj.GoBack();
+        }
+
+        private void cmbManufacturer_KeyUp(object sender, KeyEventArgs e)
+        {
+            string text = cmbManufacturer.Text;
+
+            var filtered = AuxClasses.DBClass.entObj.ToolManufacturer.Where(item => item.ManufacturerName.ToLower().Contains(text.ToLower())).ToList();
+            cmbManufacturer.ItemsSource = filtered;
+            cmbManufacturer.IsDropDownOpen = true;
+            cmbManufacturer.Text = text;
+
+            var textBox = cmbManufacturer.Template.FindName("PART_EditableTextBox", cmbManufacturer) as TextBox;
+            if (textBox != null)
+            {
+                textBox.CaretIndex = text.Length;
+            }
         }
     }
 }

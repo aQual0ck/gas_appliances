@@ -38,7 +38,7 @@ namespace gas_appliances.Pages
             cmbType.SelectedValuePath = "ManufacturerTypeName";
             cmbType.DisplayMemberPath = "ManufacturerTypeName";
             cmbType.ItemsSource = AuxClasses.DBClass.entObj.ToolManufacturerType.ToList();
-            cmbType.SelectedValue = man.ManufacturerName;
+            cmbType.SelectedValue = type.ManufacturerTypeName;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -54,6 +54,10 @@ namespace gas_appliances.Pages
             man.ManufacturerTypeId = typeid;
             man.ContactInfo = txbContactInfo.Text;
             man.RepresentativeName = txbRepName.Text;
+
+            AuxClasses.DBClass.entObj.SaveChanges();
+
+            MessageBox.Show("Сохранено");
         }
 
         private void menuDel_Click(object sender, RoutedEventArgs e)

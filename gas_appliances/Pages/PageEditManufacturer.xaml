@@ -25,7 +25,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Наименование:" Width="150"/>
                 <TextBox Name="txbManufacturerName" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding ManufacturerName}"/>
+                         Text="{Binding ManufacturerName, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Тип:" Width="150"/>
@@ -34,12 +34,12 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Контактная информация:" Width="150"/>
                 <TextBox Name="txbContactInfo" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding ContactInfo}"/>
+                         Text="{Binding ContactInfo, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Имя представителя:" Width="150"/>
                 <TextBox Name="txbRepName" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding RepresentativeName}"/>
+                         Text="{Binding RepresentativeName, Mode=OneWay}"/>
             </StackPanel>
 
             <Button Name="btnSave" Content="Сохранить" Click="btnSave_Click">

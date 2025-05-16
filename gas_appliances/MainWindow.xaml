@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gas_appliances"
         mc:Ignorable="d"
-        Title="Учет газовых приборов" Height="700" Width="1000">
+        Title="Лаборатория газового оборудования" Height="700" Width="1400" MinHeight="700"
+        MinWidth="1400">
     <Grid>
         <Frame Name="frmMain" NavigationUIVisibility="Hidden"/>
     </Grid>

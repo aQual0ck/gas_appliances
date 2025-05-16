@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using gas_appliances.AuxClasses;
 
 namespace gas_appliances.Pages
 {
@@ -25,6 +26,7 @@ namespace gas_appliances.Pages
         private AuxClasses.Category cat;
         private AuxClasses.Statuses stat;
         private AuxClasses.Owners own;
+        private List<Owners> ownList;
         public PageEditAppliance(object item)
         {
             InitializeComponent();
@@ -54,8 +56,9 @@ namespace gas_appliances.Pages
 
             cmbOwner.SelectedValuePath = "OwnerName";
             cmbOwner.DisplayMemberPath = "OwnerName";
-            cmbOwner.ItemsSource = AuxClasses.DBClass.entObj.Owners.ToList();
-            cmbOwner.SelectedValue = own.OwnerName;
+            ownList = AuxClasses.DBClass.entObj.Owners.ToList();
+            cmbOwner.ItemsSource = ownList;
+            cmbOwner.SelectedItem = AuxClasses.DBClass.entObj.Owners.FirstOrDefault(x => x.Id == own.Id);
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -63,17 +66,11 @@ namespace gas_appliances.Pages
             AuxClasses.FrameClass.frmObj.GoBack();
         }
 
-        private void cmbOwner_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            cmbOwner.IsDropDownOpen = true;
-            cmbOwner.ItemsSource = AuxClasses.DBClass.entObj.Owners.Where(s => s.OwnerName.ToLower().Contains(cmbOwner.Text.ToLower())).ToList();
-        }
-
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectionBoxItem)["Id"].GetValue(cmbCategory.SelectionBoxItem));
             int statid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbStatus.SelectionBoxItem)["Id"].GetValue(cmbStatus.SelectionBoxItem));
-            int ownid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbOwner.SelectionBoxItem)["Id"].GetValue(cmbOwner.SelectionBoxItem));
+            int ownid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbOwner.SelectedItem)["Id"].GetValue(cmbOwner.SelectedItem));
             string dateIns = dpInstalled.SelectedDate?.ToString(App.DateFormat);
             DateTime dtIns = DateTime.Parse(dateIns);
             string dateNext = dpNextExam.SelectedDate?.ToString(App.DateFormat);
@@ -98,6 +95,23 @@ namespace gas_appliances.Pages
                 AuxClasses.DBClass.entObj.Appliance.Remove(appl);
                 AuxClasses.DBClass.entObj.SaveChanges();
                 AuxClasses.FrameClass.frmObj.GoBack();
+            }
+        }
+
+        private void cmbOwner_KeyUp(object sender, KeyEventArgs e)
+        {
+            string text = cmbOwner.Text;
+
+            var filtered = ownList.Where(item => item.OwnerName.ToLower().Contains(text.ToLower())).ToList();
+
+            cmbOwner.ItemsSource = filtered;
+            cmbOwner.IsDropDownOpen = true;
+            cmbOwner.Text = text;
+
+            var textBox = cmbOwner.Template.FindName("PART_EditableTextBox", cmbOwner) as TextBox;
+            if (textBox != null)
+            {
+                textBox.CaretIndex = text.Length;
             }
         }
     }

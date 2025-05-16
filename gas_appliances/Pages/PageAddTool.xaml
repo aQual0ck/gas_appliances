@@ -44,7 +44,9 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Производитель:" Width="150"/>
                 <ComboBox Name="cmbManufacturer" Width="150" Height="20" 
-                          Margin="5, 5, 0, 5"/>
+                          Margin="5, 5, 0, 5" IsEditable="True" StaysOpenOnEdit="True"
+                          TextSearch.TextPath="ManufacturerName"
+                          KeyUp="cmbManufacturer_KeyUp" IsTextSearchEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Серийный номер:" Width="150"/>

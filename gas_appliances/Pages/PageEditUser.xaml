@@ -25,17 +25,17 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Имя:" Width="150"/>
                 <TextBox Name="txbFullName" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding FullName}"/>
+                         Text="{Binding FullName, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Логин:" Width="150"/>
                 <TextBox Name="txbUsername" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding Username}"/>
+                         Text="{Binding Username, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Пароль:" Width="150"/>
                 <TextBox Name="txbPassword" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding Password}"/>
+                         Text="{Binding Password, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Категория:" Width="150"/>

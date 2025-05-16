@@ -40,9 +40,6 @@
                   AutoGenerateColumns="False" IsReadOnly="True" 
                   MouseDoubleClick="dgrManufacturers_MouseDoubleClick">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Наименование" 
-                                    Binding="{Binding ManufacturerName}" 
-                                    Width="*"/>
                 <DataGridTemplateColumn Header="Тип" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -54,6 +51,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Наименование" 
+                                    Binding="{Binding ManufacturerName}" 
+                                    Width="*"/>
                 <DataGridTextColumn Header="Контактная информация" 
                                     Binding="{Binding ContactInfo}"
                                     Width="*"/>

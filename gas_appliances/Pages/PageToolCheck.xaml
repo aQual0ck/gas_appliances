@@ -17,19 +17,36 @@
 
         <Menu Grid.Row="0">
             <MenuItem Name="menuAddExam" Header="Добавить" 
-              Click="menuAddExam_Click"/>
+                      Click="menuAddExam_Click"/>
+            <MenuItem Name="menuReport" Header="Отчет"
+                      Click="menuReport_Click"/>
             <MenuItem Name="menuLogOut" Header="Выход"
-              Click="menuLogOut_Click"/>
+                      Click="menuLogOut_Click"/>
         </Menu>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" 
-            VerticalAlignment="Center">
+                    VerticalAlignment="Center">
+            <Label Content="Поиск:"/>
+            <TextBox Width="150" Height="25" Margin="10, 0"
+                     Name="txbSearchUsers" 
+                     TextChanged="txbSearchUsers_TextChanged"/>
+            <TextBox Width="150" Height="25" Margin="0, 0, 10, 0"
+                     Name="txbSearchTools" 
+                     TextChanged="txbSearchTools_TextChanged"/>
+            <Label Content="Проверки с"/>
+            <DatePicker Width="150" Height="25" Margin="10, 0" 
+                        Name="dpCheckDateStart" 
+                        SelectedDateChanged="dpCheckDateStart_SelectedDateChanged"/>
+            <Label Content="до"/>
+            <DatePicker Width="150" Height="25" Margin="10, 0" 
+                        Name="dpCheckDateEnd" 
+                        SelectedDateChanged="dpCheckDateEnd_SelectedDateChanged"/>
             <Button Height="25" Width="75" Name="btnRefresh"
-            Content="Обновить" Click="btnRefresh_Click"/>
+                    Content="Обновить" Click="btnRefresh_Click"/>
         </StackPanel>
 
         <DataGrid Name="dgrToolExam" Grid.Row="2" 
-          AutoGenerateColumns="False" IsReadOnly="True">
+                  AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Проверяющий" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
@@ -54,8 +71,8 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Дата проверки" 
-                            Binding="{Binding CheckDate, StringFormat=d}"
-                            Width="*"/>
+                                    Binding="{Binding CheckDate, StringFormat=d}"
+                                    Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

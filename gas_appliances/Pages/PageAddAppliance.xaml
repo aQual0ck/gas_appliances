@@ -40,8 +40,9 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Владелец:" Width="150"/>
                 <ComboBox Name="cmbOwner" Width="150" Height="20" Margin="5, 5, 0, 5"
-                          IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
-                          TextBoxBase.TextChanged="cmbOwner_TextChanged"/>
+                          IsEditable="True" StaysOpenOnEdit="True" 
+                          TextSearch.TextPath="OwnerName" KeyUp="cmbOwner_KeyUp"
+                          IsTextSearchEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="В эксплуатации с:" Width="150"/>

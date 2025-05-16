@@ -24,42 +24,45 @@
                     Grid.Row="1">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Категория:" Width="150"/>
-                <ComboBox Name="cmbCategory" Width="150" Height="20" Margin="5, 5, 0, 5"/>
+                <ComboBox Name="cmbCategory" Width="150" Height="20" 
+                          Margin="5, 5, 0, 5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Модель:" Width="150"/>
                 <TextBox Name="txbModelName" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding ModelName}"/>
+                         Text="{Binding ModelName, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="В эксплуатации с:" Width="150"/>
                 <DatePicker Name="dpOperating" Width="150" Margin="5, 5, 0, 5"
-                            SelectedDate="{Binding OperatingSince}"/>
+                            SelectedDate="{Binding OperatingSince, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="След. поверка:" Width="150"/>
                 <DatePicker Name="dpNextExam" Width="150" Margin="5, 5, 0, 5"
-                SelectedDate="{Binding NextExamination}"/>
+                SelectedDate="{Binding NextExamination, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Списан с:" Width="150"/>
                 <DatePicker Name="dpDecom" Width="150" Margin="5, 5, 0, 5"
-                            SelectedDate="{Binding DecomissionedSince}"/>
+                            SelectedDate="{Binding DecomissionedSince, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Производитель:" Width="150"/>
                 <ComboBox Name="cmbManufacturer" Width="150" Height="20" 
-              Margin="5, 5, 0, 5"/>
+                          Margin="5, 5, 0, 5" IsEditable="True" StaysOpenOnEdit="True"
+                          TextSearch.TextPath="ManufacturerName"
+                          KeyUp="cmbManufacturer_KeyUp" IsTextSearchEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Серийный номер:" Width="150"/>
                 <TextBox Name="txbSN" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding SerialNumber}"/>
+                         Text="{Binding SerialNumber, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Заметки:" Width="150"/>
                 <TextBox Name="txbNotes" Width="150" Height="100" Margin="5, 5, 0, 5"
-                         Text="{Binding Notes}"/>
+                         Text="{Binding Notes, Mode=OneWay}"/>
             </StackPanel>
 
             <Button Name="btnSave" Content="Сохранить" Click="btnSave_Click">

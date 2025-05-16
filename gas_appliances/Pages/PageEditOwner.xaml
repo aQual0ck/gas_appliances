@@ -26,13 +26,13 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Имя:" Width="150"/>
                 <TextBox Name="txbOwnerName" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding OwnerName}"/>
+                         Text="{Binding OwnerName, Mode=OneWay}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Контактная информация:" Width="150"/>
                 <TextBox Name="txbContactInfo" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding ContactInfo}"/>
+                         Text="{Binding ContactInfo, Mode=OneWay}"/>
             </StackPanel>
 
             <Button Name="btnSave" Content="Сохранить" Click="btnSave_Click"

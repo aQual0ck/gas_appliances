@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace gas_appliances.Pages
 {
@@ -22,6 +23,8 @@ namespace gas_appliances.Pages
     /// </summary>
     public partial class PageAddTool : Page
     {
+        private List<ToolManufacturer> man;
+        private List<string> manOriginal = new List<string>();
         public PageAddTool()
         {
             InitializeComponent();
@@ -31,9 +34,10 @@ namespace gas_appliances.Pages
 
             cmbManufacturer.SelectedValuePath = "ManufacturerName";
             cmbManufacturer.DisplayMemberPath = "ManufacturerName";
-            List<ToolManufacturer> man = AuxClasses.DBClass.entObj.ToolManufacturer.ToList();
+            man = AuxClasses.DBClass.entObj.ToolManufacturer.ToList();
             foreach (AuxClasses.ToolManufacturer tm in man)
             {
+                manOriginal.Add(tm.ManufacturerName);
                 tm.ManufacturerName = tm.ToolManufacturerType.ManufacturerTypeName + " " + $"\"{tm.ManufacturerName}\"";
             }
             cmbManufacturer.ItemsSource = man;
@@ -41,12 +45,24 @@ namespace gas_appliances.Pages
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            int id = 0;
+            foreach (AuxClasses.ToolManufacturer tm in man)
+            {
+                tm.ManufacturerName = manOriginal[id];
+                id++;
+            }
             AuxClasses.FrameClass.frmObj.GoBack();
         }
 
         private AuxClasses.Tool tool;
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            int id = 0;
+            foreach (AuxClasses.ToolManufacturer tm in man)
+            {
+                tm.ManufacturerName = manOriginal[id];
+                id++;
+            }
             string dateOp = dpOperating.SelectedDate?.ToString(App.DateFormat);
             DateTime dtOp = DateTime.Parse(dateOp);
             string dateNE = dpNextExam.SelectedDate?.ToString(App.DateFormat);
@@ -54,7 +70,8 @@ namespace gas_appliances.Pages
             string dateDec = dpDecom.SelectedDate?.ToString(App.DateFormat);
             DateTime dtDec = DateTime.Parse(dateDec);
             int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectionBoxItem)["Id"].GetValue(cmbCategory.SelectionBoxItem));
-            int manid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbManufacturer.SelectionBoxItem)["Id"].GetValue(cmbManufacturer.SelectionBoxItem));
+            int manid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbManufacturer.SelectedItem)["Id"].GetValue(cmbManufacturer.SelectedItem));
+            
             tool = new AuxClasses.Tool()
             {
                 CategoryId = catid,
@@ -69,6 +86,22 @@ namespace gas_appliances.Pages
             AuxClasses.DBClass.entObj.Tool.Add(tool);
             AuxClasses.DBClass.entObj.SaveChanges();
             MessageBox.Show("Добавлено");
+        }
+
+        private void cmbManufacturer_KeyUp(object sender, KeyEventArgs e)
+        {
+            string text = cmbManufacturer.Text;
+
+            var filtered = man.Where(item => item.ManufacturerName.ToLower().Contains(text.ToLower())).ToList();
+
+            cmbManufacturer.ItemsSource = filtered;
+            cmbManufacturer.IsDropDownOpen = true;
+
+            var textBox = cmbManufacturer.Template.FindName("PART_EditableTextBox", cmbManufacturer) as TextBox;
+            if (textBox != null)
+            {
+                textBox.CaretIndex = text.Length;
+            }
         }
     }
 }

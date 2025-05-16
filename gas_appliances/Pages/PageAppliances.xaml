@@ -12,23 +12,28 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0">
             <MenuItem Name="menuAddAppliance" Header="Добавить" 
                       Click="menuAddAppliance_Click"/>
-            <!--<MenuItem Name="menuReport" Header="Отчет"
-                      Click="menuReport_Click"/>-->
+            <MenuItem Name="menuReport" Header="Отчет"
+                      Click="menuReport_Click"/>
             <MenuItem Name="menuLogOut" Header="Выход"
                       Click="menuLogOut_Click"/>
         </Menu>
+        
         <StackPanel Orientation="Horizontal" Grid.Row="1" 
                     VerticalAlignment="Center">
             <Label Content="Поиск:"/>
             <TextBox Width="150" Height="25" Margin="10, 0"
                      Name="txbSearchAppliances" 
                      TextChanged="txbSearchAppliances_TextChanged"/>
+            <TextBox Width="150" Height="25" Margin="0, 0, 10, 0"
+                     Name="txbSearchAppliancesSN" 
+                     TextChanged="txbSearchAppliancesSN_TextChanged"/>
             <ComboBox Height="25" Width="150" Name="cmbCategory"
                       SelectionChanged="cmbCategory_SelectionChanged"/>
             <ComboBox Height="25" Width="150" Name="cmbStatus"
@@ -37,8 +42,27 @@
             <Button Height="25" Width="75" Name="btnRefresh"
                     Content="Обновить" Click="btnRefresh_Click"/>
         </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center">
+            <Label Content="В экспл. с"/>
+            <DatePicker Width="150" Height="25" Margin="10, 0" 
+                        Name="dpInstalledSinceStart" 
+                        SelectedDateChanged="dpInstalledSinceStart_SelectedDateChanged"/>
+            <Label Content="до"/>
+            <DatePicker Width="150" Height="25" Margin="10, 0" 
+                        Name="dpInstalledSinceEnd" 
+                        SelectedDateChanged="dpInstalledSinceEnd_SelectedDateChanged"/>
+            <Label Content="След. проверка с"/>
+            <DatePicker Width="150" Height="25" Margin="10, 0" 
+                        Name="dpNextExaminationStart" 
+                        SelectedDateChanged="dpNextExaminationStart_SelectedDateChanged"/>
+            <Label Content="до"/>
+            <DatePicker Width="150" Height="25" Margin="10, 0" 
+                        Name="dpNextExaminationEnd" 
+                        SelectedDateChanged="dpNextExaminationEnd_SelectedDateChanged"/>
+        </StackPanel>
                           
-        <DataGrid Name="dgrAppliances" Grid.Row="2" 
+        <DataGrid Name="dgrAppliances" Grid.Row="3" 
                   AutoGenerateColumns="False" IsReadOnly="True" 
                   MouseDoubleClick="dgrAppliances_MouseDoubleClick">
             <DataGrid.Columns>
