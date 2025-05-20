@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using gas_appliances.AuxClasses;
 
 namespace gas_appliances.Pages
 {
@@ -21,31 +22,22 @@ namespace gas_appliances.Pages
     /// </summary>
     public partial class PageAddExam : Page
     {
-        AuxClasses.ApplianceCheck exam;
+        private AuxClasses.ApplianceCheck exam;
+        private List<Appliance> appl;
+        private List<Users> user;
         public PageAddExam()
         {
             InitializeComponent();
 
-            InitializeComponent();
             cmbAppliance.SelectedValuePath = "ApplianceName";
             cmbAppliance.DisplayMemberPath = "ApplianceName";
-            cmbAppliance.ItemsSource = AuxClasses.DBClass.entObj.Appliance.ToList();
+            appl = AuxClasses.DBClass.entObj.Appliance.ToList();
+            cmbAppliance.ItemsSource = appl;
 
             cmbUser.SelectedValuePath = "FullName";
             cmbUser.DisplayMemberPath = "FullName";
-            cmbUser.ItemsSource = AuxClasses.DBClass.entObj.Users.ToList();
-        }
-
-        private void cmbAppliance_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            cmbAppliance.IsDropDownOpen = true;
-            cmbAppliance.ItemsSource = AuxClasses.DBClass.entObj.Appliance.Where(s => s.ApplianceName.ToLower().Contains(cmbAppliance.Text.ToLower())).ToList();
-        }
-
-        private void cmbUser_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            cmbUser.IsDropDownOpen = true;
-            cmbUser.ItemsSource = AuxClasses.DBClass.entObj.Users.Where(s => s.FullName.ToLower().Contains(cmbUser.Text.ToLower())).ToList();
+            user = AuxClasses.DBClass.entObj.Users.ToList();
+            cmbUser.ItemsSource = user;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -55,20 +47,75 @@ namespace gas_appliances.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            int applid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbAppliance.SelectionBoxItem)["Id"].GetValue(cmbAppliance.SelectionBoxItem));
-            int userid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbUser.SelectionBoxItem)["Id"].GetValue(cmbUser.SelectionBoxItem));
-            string dateExam = dpExam.SelectedDate?.ToString(App.DateFormat);
-            DateTime dtExam = DateTime.Parse(dateExam);
-
-            exam = new AuxClasses.ApplianceCheck
+            if (cmbAppliance.SelectedItem == null || cmbUser.SelectedItem == null || string.IsNullOrEmpty(dpExam.Text))
             {
-                ApplianceId = applid,
-                UserId = userid,
-                CheckDate = dtExam
-            };
-            AuxClasses.DBClass.entObj.ApplianceCheck.Add(exam);
-            AuxClasses.DBClass.entObj.SaveChanges();
-            MessageBox.Show("Добавлено");
+                MessageBox.Show("Пожалуйста, заполните все поля");
+            }
+            else
+            {
+                int applid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbAppliance.SelectionBoxItem)["Id"].GetValue(cmbAppliance.SelectionBoxItem));
+                int userid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbUser.SelectionBoxItem)["Id"].GetValue(cmbUser.SelectionBoxItem));
+                string dateExam = dpExam.SelectedDate?.ToString(App.DateFormat);
+                DateTime dtExam = DateTime.Parse(dateExam);
+
+                exam = new AuxClasses.ApplianceCheck
+                {
+                    ApplianceId = applid,
+                    UserId = userid,
+                    CheckDate = dtExam
+                };
+                AuxClasses.DBClass.entObj.ApplianceCheck.Add(exam);
+                AuxClasses.DBClass.entObj.SaveChanges();
+                MessageBox.Show("Добавлено");
+            }
+        }
+
+        private void cmbAppliance_KeyUp(object sender, KeyEventArgs e)
+        {
+            string text = cmbAppliance.Text;
+
+            var filtered = appl.Where(item => item.ApplianceName.ToLower().Contains(text.ToLower())).ToList();
+
+            cmbAppliance.ItemsSource = filtered;
+            cmbAppliance.IsDropDownOpen = true;
+            cmbAppliance.Text = text;
+
+            var textBox = cmbAppliance.Template.FindName("PART_EditableTextBox", cmbAppliance) as TextBox;
+            if (textBox != null)
+            {
+                textBox.CaretIndex = text.Length;
+            }
+        }
+
+        private void cmbUser_KeyUp(object sender, KeyEventArgs e)
+        {
+            string text = cmbUser.Text;
+
+            var filtered = user.Where(item => item.FullName.ToLower().Contains(text.ToLower())).ToList();
+
+            cmbUser.ItemsSource = filtered;
+            cmbUser.IsDropDownOpen = true;
+            cmbUser.Text = text;
+
+            var textBox = cmbUser.Template.FindName("PART_EditableTextBox", cmbUser) as TextBox;
+            if (textBox != null)
+            {
+                textBox.CaretIndex = text.Length;
+            }
+        }
+
+        public static IEnumerable<Control> FindInputControls(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is TextBox || child is ComboBox || child is DatePicker)
+                    yield return (Control)child;
+
+                foreach (var descendant in FindInputControls(child))
+                    yield return descendant;
+            }
         }
     }
 }

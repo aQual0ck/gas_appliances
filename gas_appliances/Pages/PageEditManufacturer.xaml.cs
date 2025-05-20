@@ -48,16 +48,23 @@ namespace gas_appliances.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            int typeid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbType.SelectionBoxItem)["Id"].GetValue(cmbType.SelectionBoxItem));
+            if (string.IsNullOrEmpty(txbManufacturerName.Text) || cmbType.SelectedItem == null)
+            {
+                MessageBox.Show("Пожалуйста, заполните все поля");
+            }
+            else
+            {
+                int typeid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbType.SelectionBoxItem)["Id"].GetValue(cmbType.SelectionBoxItem));
 
-            man.ManufacturerName = txbManufacturerName.Text;
-            man.ManufacturerTypeId = typeid;
-            man.ContactInfo = txbContactInfo.Text;
-            man.RepresentativeName = txbRepName.Text;
+                man.ManufacturerName = txbManufacturerName.Text;
+                man.ManufacturerTypeId = typeid;
+                man.ContactInfo = txbContactInfo.Text;
+                man.RepresentativeName = txbRepName.Text;
 
-            AuxClasses.DBClass.entObj.SaveChanges();
+                AuxClasses.DBClass.entObj.SaveChanges();
 
-            MessageBox.Show("Сохранено");
+                MessageBox.Show("Сохранено");
+            }
         }
 
         private void menuDel_Click(object sender, RoutedEventArgs e)

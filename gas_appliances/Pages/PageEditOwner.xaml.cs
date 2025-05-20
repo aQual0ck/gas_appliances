@@ -48,12 +48,19 @@ namespace gas_appliances.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            own.OwnerName = txbOwnerName.Text;
-            own.ContactInfo = txbContactInfo.Text;
+            if (string.IsNullOrEmpty(txbContactInfo.Text))
+            {
+                MessageBox.Show("Пожалуйста, заполните все поля");
+            }
+            else
+            {
+                own.OwnerName = txbOwnerName.Text;
+                own.ContactInfo = txbContactInfo.Text;
 
-            AuxClasses.DBClass.entObj.SaveChanges();
+                AuxClasses.DBClass.entObj.SaveChanges();
 
-            MessageBox.Show("Сохранено");
+                MessageBox.Show("Сохранено");
+            }
         }
     }
 }

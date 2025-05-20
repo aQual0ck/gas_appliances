@@ -23,7 +23,8 @@
                     Grid.Row="1">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Наименование:" Width="150"/>
-                <TextBox Name="txbManufacturerName" Width="150" Margin="5, 5, 0, 5"/>
+                <TextBox Name="txbManufacturerName" Width="150" Margin="5, 5, 0, 5"
+                         MaxLength="100"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Тип:" Width="150"/>
@@ -31,11 +32,13 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Контактная информация:" Width="150"/>
-                <TextBox Name="txbContactInfo" Width="150" Margin="5, 5, 0, 5"/>
+                <TextBox Name="txbContactInfo" Width="150" Margin="5, 5, 0, 5"
+                         MaxLength="100"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Имя представителя:" Width="150"/>
-                <TextBox Name="txbRepName" Width="150" Margin="5, 5, 0, 5"/>
+                <TextBox Name="txbRepName" Width="150" Margin="5, 5, 0, 5"
+                         MaxLength="100"/>
             </StackPanel>
             
             <Button Name="btnSave" Content="Сохранить" Click="btnSave_Click">

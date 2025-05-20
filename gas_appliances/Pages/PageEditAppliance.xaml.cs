@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using gas_appliances.AuxClasses;
+using System.Windows.Controls.Primitives;
 
 namespace gas_appliances.Pages
 {
@@ -68,24 +69,43 @@ namespace gas_appliances.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectionBoxItem)["Id"].GetValue(cmbCategory.SelectionBoxItem));
-            int statid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbStatus.SelectionBoxItem)["Id"].GetValue(cmbStatus.SelectionBoxItem));
-            int ownid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbOwner.SelectedItem)["Id"].GetValue(cmbOwner.SelectedItem));
-            string dateIns = dpInstalled.SelectedDate?.ToString(App.DateFormat);
-            DateTime dtIns = DateTime.Parse(dateIns);
-            string dateNext = dpNextExam.SelectedDate?.ToString(App.DateFormat);
-            DateTime dtNext = DateTime.Parse(dateNext);
+            bool allFilled = true;
 
-            appl.CategoryId = catid;
-            appl.StatusId = statid;
-            appl.ApplianceName = txbApplianceName.Text;
-            appl.ApplianceAddress = txbApplianceAddress.Text;
-            appl.ApplianceOwnerId = ownid;
-            appl.SerialNumber = txbSN.Text;
-            appl.Notes = txbNotes.Text;
+            foreach (var control in FindInputControls(this))
+            {
+                if (control is TextBox tb && string.IsNullOrWhiteSpace(tb.Text) && tb.Name != "txbNotes" && control.GetType() != typeof(DatePickerTextBox))
+                    allFilled = false;
+                else if (control is ComboBox cb && (cb.SelectedItem == null || cb.SelectedIndex == -1))
+                    allFilled = false;
 
-            AuxClasses.DBClass.entObj.SaveChanges();
-            MessageBox.Show("Сохранено");
+                if (allFilled == false) break;
+            }
+
+            if (allFilled == false)
+            {
+                MessageBox.Show("Пожалуйста, заполните все поля");
+            }
+            else
+            {
+                int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectionBoxItem)["Id"].GetValue(cmbCategory.SelectionBoxItem));
+                int statid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbStatus.SelectionBoxItem)["Id"].GetValue(cmbStatus.SelectionBoxItem));
+                int ownid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbOwner.SelectedItem)["Id"].GetValue(cmbOwner.SelectedItem));
+                string dateIns = dpInstalled.SelectedDate?.ToString(App.DateFormat);
+                DateTime? dtIns = dateIns != null ? DateTime.Parse(dateIns) : (DateTime?)null;
+                string dateNext = dpNextExam.SelectedDate?.ToString(App.DateFormat);
+                DateTime? dtNext = dateNext != null ? DateTime.Parse(dateNext) : (DateTime?)null;
+
+                appl.CategoryId = catid;
+                appl.StatusId = statid;
+                appl.ApplianceName = txbApplianceName.Text;
+                appl.ApplianceAddress = txbApplianceAddress.Text;
+                appl.ApplianceOwnerId = ownid;
+                appl.SerialNumber = txbSN.Text;
+                appl.Notes = txbNotes.Text;
+
+                AuxClasses.DBClass.entObj.SaveChanges();
+                MessageBox.Show("Сохранено");
+            }
         }
 
         private void menuDel_Click(object sender, RoutedEventArgs e)
@@ -112,6 +132,20 @@ namespace gas_appliances.Pages
             if (textBox != null)
             {
                 textBox.CaretIndex = text.Length;
+            }
+        }
+
+        public static IEnumerable<Control> FindInputControls(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is TextBox || child is ComboBox || child is DatePicker)
+                    yield return (Control)child;
+
+                foreach (var descendant in FindInputControls(child))
+                    yield return descendant;
             }
         }
     }

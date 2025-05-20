@@ -53,16 +53,23 @@ namespace gas_appliances.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            int roleid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbRole.SelectionBoxItem)["Id"].GetValue(cmbRole.SelectionBoxItem));
+            if (string.IsNullOrEmpty(txbUsername.Text) || string.IsNullOrEmpty(txbPassword.Text) || string.IsNullOrEmpty(txbFullName.Text) || cmbRole.SelectedItem == null)
+            {
+                MessageBox.Show("Пожалуйста, заполните все поля");
+            }
+            else
+            {
+                int roleid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbRole.SelectionBoxItem)["Id"].GetValue(cmbRole.SelectionBoxItem));
 
-            user.FullName = txbFullName.Text;
-            user.Username = txbUsername.Text;
-            user.Password = txbPassword.Text;
-            user.RoleId = roleid;
+                user.FullName = txbFullName.Text;
+                user.Username = txbUsername.Text;
+                user.Password = txbPassword.Text;
+                user.RoleId = roleid;
 
-            AuxClasses.DBClass.entObj.SaveChanges();
+                AuxClasses.DBClass.entObj.SaveChanges();
 
-            MessageBox.Show("Сохранено");
+                MessageBox.Show("Сохранено");
+            }
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

@@ -37,17 +37,24 @@ namespace gas_appliances.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            int roleid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbRole.SelectionBoxItem)["Id"].GetValue(cmbRole.SelectionBoxItem));
-            user = new AuxClasses.Users()
+            if (string.IsNullOrEmpty(txbUsername.Text) || string.IsNullOrEmpty(txbPassword.Text) || string.IsNullOrEmpty(txbFullName.Text) || cmbRole.SelectedItem == null)
             {
-                FullName = txbFullName.Text,
-                Username = txbUsername.Text,
-                Password = txbPassword.Text,
-                RoleId = roleid,
-            };
-            AuxClasses.DBClass.entObj.Users.Add(user);
-            AuxClasses.DBClass.entObj.SaveChanges();
-            MessageBox.Show("Добавлено");
+                MessageBox.Show("Пожалуйста, заполните все поля");
+            }
+            else
+            {
+                int roleid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbRole.SelectionBoxItem)["Id"].GetValue(cmbRole.SelectionBoxItem));
+                user = new AuxClasses.Users()
+                {
+                    FullName = txbFullName.Text,
+                    Username = txbUsername.Text,
+                    Password = txbPassword.Text,
+                    RoleId = roleid,
+                };
+                AuxClasses.DBClass.entObj.Users.Add(user);
+                AuxClasses.DBClass.entObj.SaveChanges();
+                MessageBox.Show("Добавлено");
+            }
         }
     }
 }

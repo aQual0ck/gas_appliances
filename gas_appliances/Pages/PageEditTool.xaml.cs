@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -78,33 +79,52 @@ namespace gas_appliances.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            int id = 0;
-            foreach (AuxClasses.ToolManufacturer tm in manList)
+            bool allFilled = true;
+
+            foreach (var control in FindInputControls(this))
             {
-                tm.ManufacturerName = manOriginal[id];
-                id++;
+                if (control is TextBox tb && string.IsNullOrWhiteSpace(tb.Text) && tb.Name != "txbNotes" && tb.Name != "txbSN" && control.GetType() != typeof(DatePickerTextBox))
+                    allFilled = false;
+                else if (control is ComboBox cb && (cb.SelectedItem == null || cb.SelectedIndex == -1))
+                    allFilled = false;
+
+                if (allFilled == false) break;
             }
-            int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectionBoxItem)["Id"].GetValue(cmbCategory.SelectionBoxItem));
-            int manid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbManufacturer.SelectedItem)["Id"].GetValue(cmbManufacturer.SelectedItem));
-            string dateOp = dpOperating.SelectedDate?.ToString(App.DateFormat);
-            DateTime dtOp = DateTime.Parse(dateOp);
-            string dateNE = dpNextExam.SelectedDate?.ToString(App.DateFormat);
-            DateTime dtNE = DateTime.Parse(dateNE);
-            string dateDec = dpDecom.SelectedDate?.ToString(App.DateFormat);
-            DateTime dtDec = DateTime.Parse(dateDec);
 
-            tool.CategoryId = catid;
-            tool.ModelName = txbModelName.Text;
-            tool.OperatingSince = dtOp;
-            tool.NextExamination = dtNE;
-            tool.DecomissionedSince = dtDec;
-            tool.ManufacturerId = manid;
-            tool.SerialNumber = txbSN.Text;
-            tool.Notes = txbNotes.Text;
+            if (allFilled == false)
+            {
+                MessageBox.Show("Пожалуйста, заполните все поля");
+            }
+            else
+            {
+                int id = 0;
+                foreach (AuxClasses.ToolManufacturer tm in manList)
+                {
+                    tm.ManufacturerName = manOriginal[id];
+                    id++;
+                }
+                int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectionBoxItem)["Id"].GetValue(cmbCategory.SelectionBoxItem));
+                int manid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbManufacturer.SelectedItem)["Id"].GetValue(cmbManufacturer.SelectedItem));
+                string dateOp = dpOperating.SelectedDate?.ToString(App.DateFormat);
+                DateTime? dtOp = dateOp != null ? DateTime.Parse(dateOp) : (DateTime?)null;
+                string dateNE = dpNextExam.SelectedDate?.ToString(App.DateFormat);
+                DateTime? dtNE = dateNE != null ? DateTime.Parse(dateNE) : (DateTime?)null;
+                string dateDec = dpDecom.SelectedDate?.ToString(App.DateFormat);
+                DateTime? dtDec = dateDec != null ? DateTime.Parse(dateDec) : (DateTime?)null;
 
-            AuxClasses.DBClass.entObj.SaveChanges();
+                tool.CategoryId = catid;
+                tool.ModelName = txbModelName.Text;
+                tool.OperatingSince = dtOp;
+                tool.NextExamination = dtNE;
+                tool.DecomissionedSince = dtDec;
+                tool.ManufacturerId = manid;
+                tool.SerialNumber = txbSN.Text;
+                tool.Notes = txbNotes.Text;
 
-            MessageBox.Show("Сохранено");
+                AuxClasses.DBClass.entObj.SaveChanges();
+
+                MessageBox.Show("Сохранено");
+            }
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -131,6 +151,20 @@ namespace gas_appliances.Pages
             if (textBox != null)
             {
                 textBox.CaretIndex = text.Length;
+            }
+        }
+
+        public static IEnumerable<Control> FindInputControls(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is TextBox || child is ComboBox || child is DatePicker)
+                    yield return (Control)child;
+
+                foreach (var descendant in FindInputControls(child))
+                    yield return descendant;
             }
         }
     }

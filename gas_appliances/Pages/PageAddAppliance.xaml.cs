@@ -1,4 +1,5 @@
 ﻿using gas_appliances.AuxClasses;
+using Org.BouncyCastle.Crypto.Agreement.JPake;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -48,19 +50,19 @@ namespace gas_appliances.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            bool allFilled = false;
+            bool allFilled = true;
 
             foreach (var control in FindInputControls(this)) 
             {
-                if (control is TextBox tb && (string.IsNullOrWhiteSpace(tb.Text) || tb.Name == "txbNotes"))
+                if (control is TextBox tb && string.IsNullOrWhiteSpace(tb.Text) && tb.Name != "txbNotes" && control.GetType() != typeof(DatePickerTextBox))
                     allFilled = false;
                 else if (control is ComboBox cb && (cb.SelectedItem == null || cb.SelectedIndex == -1))
                     allFilled = false;
 
-                if (allFilled == true) break;
+                if (allFilled == false) break;
             }
 
-            if (allFilled == true)
+            if (allFilled == false)
             {
                 MessageBox.Show("Пожалуйста, заполните все поля");
             }

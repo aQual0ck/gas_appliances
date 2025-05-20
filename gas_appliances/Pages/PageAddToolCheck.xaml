@@ -24,14 +24,16 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Прибор:" Width="150"/>
                 <ComboBox Name="cmbTool" Width="150" Height="20" Margin="5, 5, 0, 5"
-                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
-                  TextBoxBase.TextChanged="cmbTool_TextChanged"/>
+                          IsEditable="True" StaysOpenOnEdit="True" 
+                          TextSearch.TextPath="ModelName" KeyUp="cmbTool_KeyUp"
+                          IsTextSearchEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Проверяющий:" Width="150"/>
                 <ComboBox Name="cmbUser" Width="150" Height="20" Margin="5, 5, 0, 5"
-                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
-                  TextBoxBase.TextChanged="cmbUser_TextChanged"/>
+                          IsEditable="True" StaysOpenOnEdit="True"
+                          TextSearch.TextPath="FullName" KeyUp="cmbUser_KeyUp"
+                          IsTextSearchEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Дата проверки:" Width="150"/>

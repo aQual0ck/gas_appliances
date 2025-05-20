@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -33,14 +34,21 @@ namespace gas_appliances.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            own = new AuxClasses.Owners()
+            if (string.IsNullOrEmpty(txbContactInfo.Text))
             {
-                OwnerName = txbOwnerName.Text,
-                ContactInfo = txbContactInfo.Text
-            };
-            AuxClasses.DBClass.entObj.Owners.Add(own);
-            AuxClasses.DBClass.entObj.SaveChanges();
-            MessageBox.Show("Добавлено");
+                MessageBox.Show("Пожалуйста, заполните все поля");
+            }
+            else
+            {
+                own = new AuxClasses.Owners()
+                {
+                    OwnerName = txbOwnerName.Text,
+                    ContactInfo = txbContactInfo.Text
+                };
+                AuxClasses.DBClass.entObj.Owners.Add(own);
+                AuxClasses.DBClass.entObj.SaveChanges();
+                MessageBox.Show("Добавлено");
+            }
         }
     }
 }
