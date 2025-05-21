@@ -34,6 +34,9 @@
             <TextBox Width="150" Height="25" Margin="0, 0, 10, 0"
                      Name="txbSearchAppliancesSN" 
                      TextChanged="txbSearchAppliancesSN_TextChanged"/>
+            <TextBox Width="150" Height="25" Margin="0, 0, 10, 0"
+                     Name="txbSearchOwners" 
+                     TextChanged="txbSearchOwners_TextChanged"/>
             <ComboBox Height="25" Width="150" Name="cmbCategory"
                       SelectionChanged="cmbCategory_SelectionChanged"/>
             <ComboBox Height="25" Width="150" Name="cmbStatus"
@@ -47,19 +50,23 @@
             <Label Content="В экспл. с"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpInstalledSinceStart" 
-                        SelectedDateChanged="dpInstalledSinceStart_SelectedDateChanged"/>
+                        SelectedDateChanged="dpInstalledSinceStart_SelectedDateChanged"
+                        PreviewTextInput="dpInstalledSinceStart_PreviewTextInput"/>
             <Label Content="до"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpInstalledSinceEnd" 
-                        SelectedDateChanged="dpInstalledSinceEnd_SelectedDateChanged"/>
+                        SelectedDateChanged="dpInstalledSinceEnd_SelectedDateChanged"
+                        PreviewTextInput="dpInstalledSinceEnd_PreviewTextInput"/>
             <Label Content="След. проверка с"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpNextExaminationStart" 
-                        SelectedDateChanged="dpNextExaminationStart_SelectedDateChanged"/>
+                        SelectedDateChanged="dpNextExaminationStart_SelectedDateChanged"
+                        PreviewTextInput="dpNextExaminationStart_PreviewTextInput"/>
             <Label Content="до"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpNextExaminationEnd" 
-                        SelectedDateChanged="dpNextExaminationEnd_SelectedDateChanged"/>
+                        SelectedDateChanged="dpNextExaminationEnd_SelectedDateChanged"
+                        PreviewTextInput="dpNextExaminationEnd_PreviewTextInput"/>
         </StackPanel>
                           
         <DataGrid Name="dgrAppliances" Grid.Row="3" 
@@ -103,10 +110,10 @@
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="В экспл." 
                                         Binding="{Binding InstalledSince, StringFormat=d}" 
-                                        Width="*"/>
-                    <DataGridTextColumn Header="След. проверка" 
+                                        Width="auto"/>
+                    <DataGridTextColumn Header="След. поверка" 
                                         Binding="{Binding NextExamination, StringFormat=d}"
-                                        Width="*"/>
+                                        Width="auto"/>
                     <DataGridTextColumn Header="Серийный номер" 
                                         Binding="{Binding SerialNumber}"
                                         Width="*"/>

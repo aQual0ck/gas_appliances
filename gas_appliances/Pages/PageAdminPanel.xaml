@@ -28,9 +28,12 @@
             <TextBox Width="150" Height="25" Margin="10, 0"
                      Name="txbSearchUsers" 
                      TextChanged="txbSearchUsers_TextChanged"/>
+            <TextBox Width="150" Height="25" Margin="0, 0, 10, 0"
+                     Name="txbSearchLogin" 
+                     TextChanged="txbSearchLogin_TextChanged"/>
             <ComboBox Width="150" Height="25" Name="cmbRole"
                       SelectionChanged="cmbRole_SelectionChanged"/>
-            <Button Height="25" Width="75" Name="btnRefresh3"
+            <Button Height="25" Width="75" Name="btnRefresh"
                     Content="Обновить" Click="btnRefresh_Click" 
                     Margin="10, 0"/>
         </StackPanel>

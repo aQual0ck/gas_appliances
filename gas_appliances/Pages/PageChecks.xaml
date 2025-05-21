@@ -31,16 +31,21 @@
                      Name="txbSearchUsers" 
                      TextChanged="txbSearchUsers_TextChanged"/>
             <TextBox Width="150" Height="25" Margin="0, 0, 10, 0"
+                     Name="txbSearchOwners" 
+                     TextChanged="txbSearchOwners_TextChanged"/>
+            <TextBox Width="150" Height="25" Margin="0, 0, 10, 0"
                      Name="txbSearchAppliances" 
                      TextChanged="txbSearchAppliances_TextChanged"/>
             <Label Content="Проверки с"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpCheckDateStart" 
-                        SelectedDateChanged="dpCheckDateStart_SelectedDateChanged"/>
+                        SelectedDateChanged="dpCheckDateStart_SelectedDateChanged"
+                        PreviewTextInput="dpCheckDateStart_PreviewTextInput"/>
             <Label Content="до"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpCheckDateEnd" 
-                        SelectedDateChanged="dpCheckDateEnd_SelectedDateChanged"/>
+                        SelectedDateChanged="dpCheckDateEnd_SelectedDateChanged"
+                        PreviewTextInput="dpCheckDateEnd_PreviewTextInput"/>
             <Button Height="25" Width="75" Name="btnRefresh"
                     Content="Обновить" Click="btnRefresh_Click"/>
         </StackPanel>
@@ -70,7 +75,17 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Дата проверки" 
+                <DataGridTemplateColumn Header="Владелец" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock DataContext="{Binding Path=Appliance}">
+                                <Run DataContext="{Binding Path=Owners}"
+                                     Text="{Binding OwnerName}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Дата поверки" 
                                     Binding="{Binding CheckDate, StringFormat=d}"
                                     Width="*"/>
             </DataGrid.Columns>

@@ -18,54 +18,56 @@
             <MenuItem Header="Назад" Click="MenuItem_Click"/>
             <MenuItem Name="menuDel" Header="Удалить" Click="menuDel_Click"/>
         </Menu>
-        <Rectangle Width="350" Height="400" Fill="White" Stroke="#666666" 
-                   Grid.Row="1"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" 
+
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" 
                     Grid.Row="1">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Категория:" Width="150"/>
-                <ComboBox Name="cmbCategory" Width="150" Height="20" Margin="5, 5, 0, 5"/>
+                <TextBlock Text="Категория:" Width="150" VerticalAlignment="Center"/>
+                <ComboBox Name="cmbCategory" Width="150" Margin="5, 5, 0, 5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Статус:" Width="150"/>
-                <ComboBox Name="cmbStatus" Width="150" Height="20" Margin="5, 5, 0, 5"/>
+                <TextBlock Text="Статус:" Width="150" VerticalAlignment="Center"/>
+                <ComboBox Name="cmbStatus" Width="150" Margin="5, 5, 0, 5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Прибор:" Width="150"/>
-                <TextBox Name="txbApplianceName" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding ApplianceName, Mode=OneWay}"/>
+                <TextBlock Text="Прибор:" Width="150" VerticalAlignment="Center"/>
+                <TextBox Name="txbApplianceName" Width="250" Margin="5, 5, 0, 5"
+                         Text="{Binding ApplianceName, Mode=OneWay}" MaxLength="100"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Адрес:" Width="150"/>
-                <TextBox Name="txbApplianceAddress" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding ApplianceAddress, Mode=OneWay}"/>
+                <TextBlock Text="Адрес:" Width="150" VerticalAlignment="Center"/>
+                <TextBox Name="txbApplianceAddress" Width="350" Margin="5, 5, 0, 5"
+                         Text="{Binding ApplianceAddress, Mode=OneWay}" MaxLength="150"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Владелец:" Width="150"/>
-                <ComboBox Name="cmbOwner" Width="150" Height="20" Margin="5, 5, 0, 5"
+                <TextBlock Text="Владелец:" Width="150" VerticalAlignment="Center"/>
+                <ComboBox Name="cmbOwner" Width="250"  Margin="5, 5, 0, 5"
                           IsEditable="True" StaysOpenOnEdit="True" 
                           TextSearch.TextPath="OwnerName" KeyUp="cmbOwner_KeyUp"
                           IsTextSearchEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="В эксплуатации с:" Width="150"/>
+                <TextBlock Text="В эксплуатации с:" Width="150" VerticalAlignment="Center"/>
                 <DatePicker Name="dpInstalled" Width="150" Margin="5, 5, 0, 5"
-                            SelectedDate="{Binding InstalledSince, Mode=OneWay}"/>
+                            SelectedDate="{Binding InstalledSince, Mode=OneWay}"
+                            PreviewTextInput="dpInstalled_PreviewTextInput"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Следующая проверка:" Width="150"/>
+                <TextBlock Text="Следующая поверка:" Width="150" VerticalAlignment="Center"/>
                 <DatePicker Name="dpNextExam" Width="150" Margin="5, 5, 0, 5"
-                            SelectedDate="{Binding NextExamination, Mode=OneWay}"/>
+                            SelectedDate="{Binding NextExamination, Mode=OneWay}"
+                            PreviewTextInput="dpNextExam_PreviewTextInput"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Серийный номер:" Width="150"/>
-                <TextBox Name="txbSN" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding SerialNumber, Mode=OneWay}"/>
+                <TextBlock Text="Серийный номер:" Width="150" VerticalAlignment="Center"/>
+                <TextBox Name="txbSN" Width="250" Margin="5, 5, 0, 5"
+                         Text="{Binding SerialNumber, Mode=OneWay}" MaxLength="100"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Заметки:" Width="150"/>
-                <TextBox Name="txbNotes" Width="150" Height="100" Margin="5, 5, 0, 5"
-                         Text="{Binding Notes, Mode=OneWay}"/>
+                <TextBox Name="txbNotes" Width="200" Height="100" Margin="5, 5, 0, 5"
+                         Text="{Binding Notes, Mode=OneWay}" MaxLength="255"
+                         TextWrapping="Wrap"/>
             </StackPanel>
 
             <Button Name="btnSave" Content="Сохранить" Click="btnSave_Click"

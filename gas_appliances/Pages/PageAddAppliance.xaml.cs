@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +27,11 @@ namespace gas_appliances.Pages
     {
         private AuxClasses.Appliance appl;
         private List<Owners> own;
+        private static readonly Regex _regex = new Regex("^[0-9.]+$");
+        private static bool IsInputAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
         public PageAddAppliance()
         {
             InitializeComponent();
@@ -72,8 +78,8 @@ namespace gas_appliances.Pages
                 DateTime? dtIns = dateIns != null ? DateTime.Parse(dateIns) : (DateTime?)null;
                 string dateNext = dpNextExam.SelectedDate?.ToString(App.DateFormat);
                 DateTime? dtNext = dateNext != null ? DateTime.Parse(dateNext) : (DateTime?)null;
-                int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectionBoxItem)["Id"].GetValue(cmbCategory.SelectionBoxItem));
-                int statid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbStatus.SelectionBoxItem)["Id"].GetValue(cmbStatus.SelectionBoxItem));
+                int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectedItem)["Id"].GetValue(cmbCategory.SelectedItem));
+                int statid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbStatus.SelectedItem)["Id"].GetValue(cmbStatus.SelectedItem));
                 int ownid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbOwner.SelectedItem)["Id"].GetValue(cmbOwner.SelectedItem));
                 appl = new AuxClasses.Appliance()
                 {
@@ -90,6 +96,7 @@ namespace gas_appliances.Pages
                 AuxClasses.DBClass.entObj.Appliance.Add(appl);
                 AuxClasses.DBClass.entObj.SaveChanges();
                 MessageBox.Show("Добавлено");
+                AuxClasses.FrameClass.frmObj.GoBack();
             }
         }
 
@@ -122,6 +129,16 @@ namespace gas_appliances.Pages
                 foreach (var descendant in FindInputControls(child))
                     yield return descendant;
             }
+        }
+
+        private void dpInstalled_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpNextExam_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
         }
     }
 }

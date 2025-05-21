@@ -21,6 +21,7 @@ using iText.Kernel.Font;
 using iText.Kernel.Geom;
 using iText.Layout.Properties;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace gas_appliances.Pages
 {
@@ -30,6 +31,11 @@ namespace gas_appliances.Pages
     public partial class PageTool : Page
     {
         private int catid;
+        private static readonly Regex _regex = new Regex("^[0-9.]+$");
+        private static bool IsInputAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
         public PageTool()
         {
             InitializeComponent();
@@ -212,10 +218,10 @@ namespace gas_appliances.Pages
             try
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.FileName = "Отчет";
+                sfd.FileName = $"Отчет_{DateTime.Now.ToString("dd-MM-yyyy")}";
                 sfd.DefaultExt = ".pdf";
 
-                PdfFont font = PdfFontFactory.CreateFont($"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\Assets\\arial.ttf", "Identity-H");
+                PdfFont font = PdfFontFactory.CreateFont($"{Environment.GetEnvironmentVariable("SystemRoot")}\\Fonts\\times.ttf", "Identity-H");
 
                 bool? result = sfd.ShowDialog();
 
@@ -274,6 +280,8 @@ namespace gas_appliances.Pages
                                 }
                             }
 
+                            Paragraph paragraph = new Paragraph($"Дата отчета: {DateTime.Now.ToString("dd-MM-yyyy")}");
+                            doc.Add(paragraph);
                             doc.Add(table);
                             doc.Close();
                         }
@@ -285,6 +293,36 @@ namespace gas_appliances.Pages
             {
                 MessageBox.Show("Ошибка " + ex.Message.ToString(), "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void dpOperatingSinceStart_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpOperatingSinceEnd_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpNextExaminationStart_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpNextExaminationEnd_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpDecomissionedSinceStart_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpDecomissionedSinceEnd_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
         }
     }
 }

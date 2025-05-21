@@ -20,6 +20,7 @@ using iText.Kernel.Geom;
 using iText.Layout.Properties;
 using System.IO;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace gas_appliances.Pages
 {
@@ -28,6 +29,11 @@ namespace gas_appliances.Pages
     /// </summary>
     public partial class PageToolCheck : Page
     {
+        private static readonly Regex _regex = new Regex("^[0-9.]+$");
+        private static bool IsInputAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
         public PageToolCheck()
         {
             InitializeComponent();
@@ -47,6 +53,14 @@ namespace gas_appliances.Pages
                 txbSearchUsers.Foreground = Brushes.Gray;
                 txbSearchUsers.GotFocus += RemoveTextSearchUsers;
                 txbSearchUsers.LostFocus += AddTextSearchUsers;
+            }
+
+            if (string.IsNullOrEmpty(txbSearchSN.Text))
+            {
+                txbSearchSN.Text = "по серийному номеру";
+                txbSearchSN.Foreground = Brushes.Gray;
+                txbSearchSN.GotFocus += RemoveTextSearchSN;
+                txbSearchSN.LostFocus += AddTextSearchSN;
             }
         }
 
@@ -87,6 +101,9 @@ namespace gas_appliances.Pages
 
             if (!string.IsNullOrEmpty(txbSearchUsers.Text) && txbSearchUsers.Text != "по проверяющим")
                 query = query.Where(x => x.Users.FullName.ToLower().Contains(txbSearchUsers.Text.ToLower()));
+
+            if (!string.IsNullOrEmpty(txbSearchSN.Text) && txbSearchSN.Text != "по серийному номеру")
+                query = query.Where(x => x.Tool.SerialNumber.ToLower().Contains(txbSearchSN.Text.ToLower()));
 
             if (dpCheckDateStart.SelectedDate != null)
                 query = query.Where(x => x.CheckDate >= cds);
@@ -149,10 +166,10 @@ namespace gas_appliances.Pages
             try
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.FileName = "Отчет";
+                sfd.FileName = $"Отчет_{DateTime.Now.ToString("dd-MM-yyyy")}";
                 sfd.DefaultExt = ".pdf";
 
-                PdfFont font = PdfFontFactory.CreateFont($"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\Assets\\arial.ttf", "Identity-H");
+                PdfFont font = PdfFontFactory.CreateFont($"{Environment.GetEnvironmentVariable("SystemRoot")}\\Fonts\\times.ttf", "Identity-H");
 
                 bool? result = sfd.ShowDialog();
 
@@ -166,7 +183,7 @@ namespace gas_appliances.Pages
                         {
                             Document doc = new Document(pdf, PageSize.DEFAULT);
                             doc.SetFont(font);
-                            float[] columnWidths = { 30f, 30f, 10f };
+                            float[] columnWidths = { 30f, 30f, 30f, 10f };
                             Table table = new Table(UnitValue.CreatePercentArray(columnWidths)).UseAllAvailableWidth();
 
                             foreach (var column in dgrToolExam.Columns)
@@ -199,6 +216,8 @@ namespace gas_appliances.Pages
                                 }
                             }
 
+                            Paragraph paragraph = new Paragraph($"Дата отчета: {DateTime.Now.ToString("dd-MM-yyyy")}");
+                            doc.Add(paragraph);
                             doc.Add(table);
                             doc.Close();
                         }
@@ -210,6 +229,39 @@ namespace gas_appliances.Pages
             {
                 MessageBox.Show("Ошибка " + ex.Message.ToString(), "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void txbSearchSN_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void RemoveTextSearchSN(object sender, EventArgs e)
+        {
+            if (txbSearchSN.Text == "по серийному номеру")
+            {
+                txbSearchSN.Text = "";
+                txbSearchSN.Foreground = Brushes.Black;
+            }
+        }
+
+        private void AddTextSearchSN(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txbSearchSN.Text))
+            {
+                txbSearchSN.Text = "по серийному номеру";
+                txbSearchSN.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void dpCheckDateStart_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpCheckDateEnd_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
         }
     }
 }

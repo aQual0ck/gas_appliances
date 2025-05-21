@@ -43,7 +43,7 @@ namespace gas_appliances.Pages
             }
             else
             {
-                int typeid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbType.SelectionBoxItem)["Id"].GetValue(cmbType.SelectionBoxItem));
+                int typeid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbType.SelectedItem)["Id"].GetValue(cmbType.SelectedItem));
                 tm = new AuxClasses.ToolManufacturer()
                 {
                     ManufacturerName = txbManufacturerName.Text,
@@ -54,6 +54,7 @@ namespace gas_appliances.Pages
                 AuxClasses.DBClass.entObj.ToolManufacturer.Add(tm);
                 AuxClasses.DBClass.entObj.SaveChanges();
                 MessageBox.Show("Добавлено");
+                AuxClasses.FrameClass.frmObj.GoBack();
             }
         }
     }

@@ -12,9 +12,11 @@
         <Rectangle Width="170" Height="300" Fill="#F5F5F5" Stroke="#666666"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Логин"/>
-            <TextBox Width="100" Name="txbLogin" Margin="5"/>
+            <TextBox Width="100" Name="txbLogin" Margin="5" 
+                     PreviewTextInput="txbLogin_PreviewTextInput"/>
             <TextBlock Text="Пароль"/>
-            <PasswordBox Width="100" Name="psbPassword" Margin="5"/>
+            <PasswordBox Width="100" Name="psbPassword" Margin="5"
+                         PreviewTextInput="psbPassword_PreviewTextInput"/>
             <Button Content="Войти" Name="btnConfirm" Click="btnConfirm_Click"
                     Width="50" Margin="5">
                 <Button.Resources>

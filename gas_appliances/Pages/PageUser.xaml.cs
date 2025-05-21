@@ -29,69 +29,10 @@ namespace gas_appliances.Pages
     /// </summary>
     public partial class PageUser : Page
     {
-        private string _filepath;
-        private AuxClasses.Appliance appl;
-        private AuxClasses.Owners own;
-        private int catid;
-        private int statid;
-        public PageUser()
+        public PageUser(AuxClasses.Users user)
         {
             InitializeComponent();
+            tbUsername.Text += user.Username + " | " + user.FullName;
         }
-
-        //private void menuReport_Click(object sender, RoutedEventArgs e)
-        //{
-        //    SaveFileDialog sfd = new SaveFileDialog();
-        //    sfd.FileName = "Отчет";
-        //    sfd.DefaultExt = ".pdf";
-
-        //    PdfFont font = PdfFontFactory.CreateFont($"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\Assets\\arial.ttf", "Identity-H");
-
-        //    bool? result = sfd.ShowDialog();
-
-        //    if (result == true)
-        //    {
-        //        _filepath = sfd.FileName;
-
-        //        using (PdfWriter writer = new PdfWriter(_filepath))
-        //        {
-        //            using (PdfDocument pdf = new PdfDocument(writer))
-        //            {
-        //                Document doc = new Document(pdf, PageSize.DEFAULT);
-        //                doc.SetFont(font);
-        //                float[] columnWidths = { 10f, 20f, 20f, 10f, 10f, 30f };
-        //                Table table = new Table(UnitValue.CreatePercentArray(columnWidths)).UseAllAvailableWidth();
-
-        //                foreach (var column in dgrAppliances.Columns)
-        //                {
-        //                    table.AddHeaderCell(new Cell().Add(new Paragraph(column.Header.ToString())));
-        //                }
-
-        //                foreach (var item in dgrAppliances.Items)
-        //                {
-        //                    foreach (var column in dgrAppliances.Columns)
-        //                    {
-        //                        if (column.Header.ToString() != "Категория")
-        //                        {
-        //                            var cellContent = TypeDescriptor.GetProperties(item)[$"{column.SortMemberPath}"].GetValue(item);
-        //                            string cellValue = cellContent != null ? cellContent.ToString() : string.Empty;
-        //                            table.AddCell(new Cell().Add(new Paragraph(cellValue)));
-        //                        }
-        //                        else if (column.Header.ToString() == "Категория")
-        //                        {
-        //                            object cell = TypeDescriptor.GetProperties(item)["Category"].GetValue(item);
-        //                            string cellValue = TypeDescriptor.GetProperties(cell)["CategoryName"].GetValue(cell).ToString();
-        //                            table.AddCell(new Cell().Add(new Paragraph(cellValue)));
-        //                        }
-        //                    }
-        //                }
-
-        //                doc.Add(table);
-        //                doc.Close();
-        //            }
-        //        }
-        //        MessageBox.Show($"Отчет сохранен по данному пути: {_filepath}");
-        //    }
-        //}
     }
 }

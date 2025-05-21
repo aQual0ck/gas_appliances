@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 using gas_appliances.AuxClasses;
 using System.Windows.Controls.Primitives;
+using System.Text.RegularExpressions;
 
 namespace gas_appliances.Pages
 {
@@ -28,6 +29,11 @@ namespace gas_appliances.Pages
         private AuxClasses.Statuses stat;
         private AuxClasses.Owners own;
         private List<Owners> ownList;
+        private static readonly Regex _regex = new Regex("^[0-9.]+$");
+        private static bool IsInputAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
         public PageEditAppliance(object item)
         {
             InitializeComponent();
@@ -87,8 +93,8 @@ namespace gas_appliances.Pages
             }
             else
             {
-                int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectionBoxItem)["Id"].GetValue(cmbCategory.SelectionBoxItem));
-                int statid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbStatus.SelectionBoxItem)["Id"].GetValue(cmbStatus.SelectionBoxItem));
+                int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectedItem)["Id"].GetValue(cmbCategory.SelectedItem));
+                int statid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbStatus.SelectedItem)["Id"].GetValue(cmbStatus.SelectedItem));
                 int ownid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbOwner.SelectedItem)["Id"].GetValue(cmbOwner.SelectedItem));
                 string dateIns = dpInstalled.SelectedDate?.ToString(App.DateFormat);
                 DateTime? dtIns = dateIns != null ? DateTime.Parse(dateIns) : (DateTime?)null;
@@ -147,6 +153,16 @@ namespace gas_appliances.Pages
                 foreach (var descendant in FindInputControls(child))
                     yield return descendant;
             }
+        }
+
+        private void dpInstalled_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpNextExam_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
         }
     }
 }

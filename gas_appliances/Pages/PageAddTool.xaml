@@ -17,47 +17,53 @@
         <Menu Grid.Row="0" VerticalAlignment="Center">
             <MenuItem Header="Назад" Click="MenuItem_Click"/>
         </Menu>
-        <Rectangle Width="350" Height="400" Fill="White" Stroke="#666666" 
-                   Grid.Row="1"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" 
-                    Grid.Row="1">
+
+        <StackPanel Margin="10" Grid.Row="1">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Категория:" Width="150"/>
-                <ComboBox Name="cmbCategory" Width="150" Height="20" Margin="5, 5, 0, 5"/>
+                <TextBlock Text="Категория:" Width="150" VerticalAlignment="Center"/>
+                <ComboBox Name="cmbCategory" Width="200" Margin="5, 5, 0, 5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Модель:" Width="150"/>
-                <TextBox Name="txbModelName" Width="150" Margin="5, 5, 0, 5"/>
+                <TextBlock Text="Модель:" Width="150" VerticalAlignment="Center"/>
+                <TextBox Name="txbModelName" Width="250" Margin="5, 5, 0, 5"
+                         MaxLength="100"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="В эксплуатации с:" Width="150"/>
-                <DatePicker Name="dpOperating" Width="150" Margin="5, 5, 0, 5"/>
+                <TextBlock Text="В эксплуатации с:" Width="150" 
+                           VerticalAlignment="Center"/>
+                <DatePicker Name="dpOperating" Width="150" Margin="5, 5, 0, 5"
+                            PreviewTextInput="dpOperating_PreviewTextInput"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="След. поверка:" Width="150"/>
-                <DatePicker Name="dpNextExam" Width="150" Margin="5, 5, 0, 5"/>
+                <TextBlock Text="След. поверка:" Width="150" VerticalAlignment="Center"/>
+                <DatePicker Name="dpNextExam" Width="150" Margin="5, 5, 0, 5"
+                            PreviewTextInput="dpNextExam_PreviewTextInput"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Списан с:" Width="150"/>
-                <DatePicker Name="dpDecom" Width="150" Margin="5, 5, 0, 5"/>
+                <TextBlock Text="Списан с:" Width="150" VerticalAlignment="Center"/>
+                <DatePicker Name="dpDecom" Width="150" Margin="5, 5, 0, 5"
+                            PreviewTextInput="dpDecom_PreviewTextInput"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Производитель:" Width="150"/>
-                <ComboBox Name="cmbManufacturer" Width="150" Height="20" 
+                <TextBlock Text="Производитель:" Width="150" VerticalAlignment="Center"/>
+                <ComboBox Name="cmbManufacturer" Width="150"  
                           Margin="5, 5, 0, 5" IsEditable="True" StaysOpenOnEdit="True"
                           TextSearch.TextPath="ManufacturerName"
                           KeyUp="cmbManufacturer_KeyUp" IsTextSearchEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Серийный номер:" Width="150"/>
-                <TextBox Name="txbSN" Width="150" Margin="5, 5, 0, 5"/>
+                <TextBlock Text="Серийный номер:" Width="150" VerticalAlignment="Center"/>
+                <TextBox Name="txbSN" Width="250" Margin="5, 5, 0, 5"
+                         MaxLength="100"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Заметки:" Width="150"/>
-                <TextBox Name="txbNotes" Width="150" Height="100" Margin="5, 5, 0, 5"/>
+                <TextBox Name="txbNotes" Width="200" Height="100" Margin="5, 5, 0, 5"
+                         MaxLength="255" TextWrapping="Wrap"/>
             </StackPanel>
 
-            <Button Name="btnSave" Content="Сохранить" Click="btnSave_Click">
+            <Button Name="btnSave" Content="Сохранить" Click="btnSave_Click"
+                    Width="75">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="7"/>

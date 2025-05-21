@@ -9,6 +9,8 @@
       Title="PageUser">
 
     <Grid>
+        <TextBlock Text="Пользователь: " VerticalAlignment="Top" 
+                   HorizontalAlignment="Right" Name="tbUsername" Margin="5, 2.5"/>
         <TabControl>
             <TabItem Header="Приборы">
                 <Frame Source="PageAppliances.xaml"/>

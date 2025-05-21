@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,11 @@ namespace gas_appliances.Pages
     public partial class PageAddUser : Page
     {
         private AuxClasses.Users user;
+        private static readonly Regex _regex = new Regex("^[A-Za-z0-9]+$");
+        private static bool IsInputAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
         public PageAddUser()
         {
             InitializeComponent();
@@ -43,7 +49,7 @@ namespace gas_appliances.Pages
             }
             else
             {
-                int roleid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbRole.SelectionBoxItem)["Id"].GetValue(cmbRole.SelectionBoxItem));
+                int roleid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbRole.SelectedItem)["Id"].GetValue(cmbRole.SelectedItem));
                 user = new AuxClasses.Users()
                 {
                     FullName = txbFullName.Text,
@@ -54,7 +60,18 @@ namespace gas_appliances.Pages
                 AuxClasses.DBClass.entObj.Users.Add(user);
                 AuxClasses.DBClass.entObj.SaveChanges();
                 MessageBox.Show("Добавлено");
+                AuxClasses.FrameClass.frmObj.GoBack();
             }
+        }
+
+        private void txbUsername_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void txbPassword_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
         }
     }
 }

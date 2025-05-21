@@ -59,7 +59,7 @@ namespace gas_appliances.Pages
             }
             else
             {
-                int roleid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbRole.SelectionBoxItem)["Id"].GetValue(cmbRole.SelectionBoxItem));
+                int roleid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbRole.SelectedItem)["Id"].GetValue(cmbRole.SelectedItem));
 
                 user.FullName = txbFullName.Text;
                 user.Username = txbUsername.Text;

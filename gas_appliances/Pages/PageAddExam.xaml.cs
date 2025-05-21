@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using gas_appliances.AuxClasses;
+using System.Text.RegularExpressions;
 
 namespace gas_appliances.Pages
 {
@@ -25,6 +26,12 @@ namespace gas_appliances.Pages
         private AuxClasses.ApplianceCheck exam;
         private List<Appliance> appl;
         private List<Users> user;
+        private List<string> applOriginal = new List<string>();
+        private static readonly Regex _regex = new Regex("^[0-9.]+$");
+        private static bool IsInputAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
         public PageAddExam()
         {
             InitializeComponent();
@@ -32,6 +39,11 @@ namespace gas_appliances.Pages
             cmbAppliance.SelectedValuePath = "ApplianceName";
             cmbAppliance.DisplayMemberPath = "ApplianceName";
             appl = AuxClasses.DBClass.entObj.Appliance.ToList();
+            foreach (Appliance appli in appl)
+            {
+                applOriginal.Add(appli.ApplianceName);
+                appli.ApplianceName = appli.ApplianceName + " | " + appli.Owners.OwnerName;
+            }
             cmbAppliance.ItemsSource = appl;
 
             cmbUser.SelectedValuePath = "FullName";
@@ -42,6 +54,12 @@ namespace gas_appliances.Pages
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            int id = 0;
+            foreach (Appliance appli in appl)
+            {
+                appli.ApplianceName = applOriginal[id];
+                id++;
+            }
             AuxClasses.FrameClass.frmObj.GoBack();
         }
 
@@ -53,8 +71,14 @@ namespace gas_appliances.Pages
             }
             else
             {
-                int applid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbAppliance.SelectionBoxItem)["Id"].GetValue(cmbAppliance.SelectionBoxItem));
-                int userid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbUser.SelectionBoxItem)["Id"].GetValue(cmbUser.SelectionBoxItem));
+                int id = 0;
+                foreach (Appliance appli in appl)
+                {
+                    appli.ApplianceName = applOriginal[id];
+                    id++;
+                }
+                int applid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbAppliance.SelectedItem)["Id"].GetValue(cmbAppliance.SelectedItem));
+                int userid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbUser.SelectedItem)["Id"].GetValue(cmbUser.SelectedItem));
                 string dateExam = dpExam.SelectedDate?.ToString(App.DateFormat);
                 DateTime dtExam = DateTime.Parse(dateExam);
 
@@ -67,6 +91,7 @@ namespace gas_appliances.Pages
                 AuxClasses.DBClass.entObj.ApplianceCheck.Add(exam);
                 AuxClasses.DBClass.entObj.SaveChanges();
                 MessageBox.Show("Добавлено");
+                AuxClasses.FrameClass.frmObj.GoBack();
             }
         }
 
@@ -116,6 +141,11 @@ namespace gas_appliances.Pages
                 foreach (var descendant in FindInputControls(child))
                     yield return descendant;
             }
+        }
+
+        private void dpExam_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
         }
     }
 }

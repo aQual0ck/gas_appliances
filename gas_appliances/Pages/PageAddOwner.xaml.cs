@@ -48,6 +48,7 @@ namespace gas_appliances.Pages
                 AuxClasses.DBClass.entObj.Owners.Add(own);
                 AuxClasses.DBClass.entObj.SaveChanges();
                 MessageBox.Show("Добавлено");
+                AuxClasses.FrameClass.frmObj.GoBack();
             }
         }
     }

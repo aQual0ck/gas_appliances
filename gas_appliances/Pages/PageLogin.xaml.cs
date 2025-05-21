@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,11 @@ namespace gas_appliances.Pages
     /// </summary>
     public partial class PageLogin : Page
     {
+        private static readonly Regex _regex = new Regex("^[A-Za-z0-9]+$");
+        private static bool IsInputAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
         public PageLogin()
         {
             InitializeComponent();
@@ -40,11 +46,11 @@ namespace gas_appliances.Pages
                     }
                     else if (userObj.RoleId == 1)
                     {
-                        AuxClasses.FrameClass.frmObj.Navigate(new PageAdmin());
+                        AuxClasses.FrameClass.frmObj.Navigate(new PageAdmin(userObj));
                     }
                     else
                     {
-                        AuxClasses.FrameClass.frmObj.Navigate(new PageUser());
+                        AuxClasses.FrameClass.frmObj.Navigate(new PageUser(userObj));
                     }
                 }
                 else
@@ -63,6 +69,16 @@ namespace gas_appliances.Pages
             {
                 MessageBox.Show("Ошибка " + ex.Message.ToString(), "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void txbLogin_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void psbPassword_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
         }
     }
 }

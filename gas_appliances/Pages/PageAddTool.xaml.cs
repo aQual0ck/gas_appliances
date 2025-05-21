@@ -26,6 +26,11 @@ namespace gas_appliances.Pages
     {
         private List<ToolManufacturer> man;
         private List<string> manOriginal = new List<string>();
+        private static readonly Regex _regex = new Regex("^[0-9.]+$");
+        private static bool IsInputAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
         public PageAddTool()
         {
             InitializeComponent();
@@ -88,7 +93,7 @@ namespace gas_appliances.Pages
                 DateTime? dtNE = dateNE != null ? DateTime.Parse(dateNE) : (DateTime?)null;
                 string dateDec = dpDecom.SelectedDate?.ToString(App.DateFormat);
                 DateTime? dtDec = dateDec != null ? DateTime.Parse(dateDec) : (DateTime?)null;
-                int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectionBoxItem)["Id"].GetValue(cmbCategory.SelectionBoxItem));
+                int catid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbCategory.SelectedItem)["Id"].GetValue(cmbCategory.SelectedItem));
                 int manid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbManufacturer.SelectedItem)["Id"].GetValue(cmbManufacturer.SelectedItem));
 
                 tool = new AuxClasses.Tool()
@@ -105,6 +110,7 @@ namespace gas_appliances.Pages
                 AuxClasses.DBClass.entObj.Tool.Add(tool);
                 AuxClasses.DBClass.entObj.SaveChanges();
                 MessageBox.Show("Добавлено");
+                AuxClasses.FrameClass.frmObj.GoBack();
             }
         }
 
@@ -136,6 +142,21 @@ namespace gas_appliances.Pages
                 foreach (var descendant in FindInputControls(child))
                     yield return descendant;
             }
+        }
+
+        private void dpOperating_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpNextExam_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpDecom_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
         }
     }
 }

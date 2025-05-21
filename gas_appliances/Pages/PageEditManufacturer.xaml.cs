@@ -54,7 +54,7 @@ namespace gas_appliances.Pages
             }
             else
             {
-                int typeid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbType.SelectionBoxItem)["Id"].GetValue(cmbType.SelectionBoxItem));
+                int typeid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbType.SelectedItem)["Id"].GetValue(cmbType.SelectedItem));
 
                 man.ManufacturerName = txbManufacturerName.Text;
                 man.ManufacturerTypeId = typeid;

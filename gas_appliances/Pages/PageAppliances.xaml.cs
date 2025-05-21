@@ -21,6 +21,7 @@ using iText.Kernel.Font;
 using iText.Kernel.Geom;
 using iText.Layout.Properties;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace gas_appliances.Pages
 {
@@ -29,6 +30,11 @@ namespace gas_appliances.Pages
     /// </summary>
     public partial class PageAppliances : Page
     {
+        private static readonly Regex _regex = new Regex("^[0-9.]+$");
+        private static bool IsInputAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
         public PageAppliances()
         {
             InitializeComponent();
@@ -62,6 +68,14 @@ namespace gas_appliances.Pages
                 txbSearchAppliancesSN.Foreground = Brushes.Gray;
                 txbSearchAppliancesSN.GotFocus += RemoveTextSearchSN;
                 txbSearchAppliancesSN.LostFocus += AddTextSearchSN;
+            }
+
+            if (string.IsNullOrEmpty(txbSearchOwners.Text))
+            {
+                txbSearchOwners.Text = "по владельцам";
+                txbSearchOwners.Foreground = Brushes.Gray;
+                txbSearchOwners.GotFocus += RemoveTextSearchOwners;
+                txbSearchOwners.LostFocus += AddTextSearchOwners;
             }
         }
 
@@ -97,6 +111,9 @@ namespace gas_appliances.Pages
 
             if (!string.IsNullOrEmpty(txbSearchAppliancesSN.Text) && txbSearchAppliancesSN.Text != "по серийному номеру")
                 queryAppl = queryAppl.Where(x => x.SerialNumber.ToLower().Contains(txbSearchAppliancesSN.Text.ToLower()));
+
+            if (!string.IsNullOrEmpty(txbSearchOwners.Text) && txbSearchOwners.Text != "по владельцам")
+                queryAppl = queryAppl.Where(x => x.Owners.OwnerName.ToLower().Contains(txbSearchOwners.Text.ToLower()));
 
             if (dpInstalledSinceStart.SelectedDate != null)
                 queryAppl = queryAppl.Where(x => x.InstalledSince >= iss);
@@ -189,6 +206,24 @@ namespace gas_appliances.Pages
             }
         }
 
+        private void RemoveTextSearchOwners(object sender, EventArgs e)
+        {
+            if (txbSearchOwners.Text == "по владельцам")
+            {
+                txbSearchOwners.Text = "";
+                txbSearchOwners.Foreground = Brushes.Black;
+            }
+        }
+
+        private void AddTextSearchOwners(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txbSearchOwners.Text))
+            {
+                txbSearchOwners.Text = "по владельцам";
+                txbSearchOwners.Foreground = Brushes.Gray;
+            }
+        }
+
         private void dpInstalledSinceStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             ApplyFilters();
@@ -215,10 +250,10 @@ namespace gas_appliances.Pages
             try 
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.FileName = "Отчет";
+                sfd.FileName = $"Отчет_{DateTime.Now.ToString("dd-MM-yyyy")}";
                 sfd.DefaultExt = ".pdf";
 
-                PdfFont font = PdfFontFactory.CreateFont($"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\Assets\\arial.ttf", "Identity-H");
+                PdfFont font = PdfFontFactory.CreateFont($"{Environment.GetEnvironmentVariable("SystemRoot")}\\Fonts\\times.ttf", "Identity-H");
 
                 bool? result = sfd.ShowDialog();
 
@@ -246,7 +281,7 @@ namespace gas_appliances.Pages
                                 {
                                     if (column.Header.ToString() != "Статус" && column.Header.ToString() != "Категория" && column.Header.ToString() != "Владелец")
                                     {
-                                        if (column.Header.ToString() == "В экспл." || column.Header.ToString() == "След. проверка")
+                                        if (column.Header.ToString() == "В экспл." || column.Header.ToString() == "След. поверка")
                                         {
                                             DateTime? cellContent = (DateTime?)TypeDescriptor.GetProperties(item)[$"{column.SortMemberPath}"].GetValue(item);
                                             string cellValue = cellContent != null ? cellContent?.ToString("dd-MM-yyyy") : string.Empty;
@@ -280,6 +315,8 @@ namespace gas_appliances.Pages
                                 }
                             }
 
+                            Paragraph paragraph = new Paragraph($"Дата отчета: {DateTime.Now.ToString("dd-MM-yyyy")}");
+                            doc.Add(paragraph);
                             doc.Add(table);
                             doc.Close();
                         }
@@ -291,6 +328,31 @@ namespace gas_appliances.Pages
             {
                 MessageBox.Show("Ошибка " + ex.Message.ToString(), "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void txbSearchOwners_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void dpInstalledSinceStart_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpInstalledSinceEnd_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpNextExaminationStart_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
+        }
+
+        private void dpNextExaminationEnd_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
         }
     }
 }

@@ -19,20 +19,18 @@
             <MenuItem Name="menuDel" Header="Удалить" Click="menuDel_Click"/>
         </Menu>
 
-        <Rectangle Width="350" Height="400" Fill="White" Stroke="#666666" 
-                   Grid.Row="1"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" 
-                    Grid.Row="1">
+        <StackPanel Margin="10" Grid.Row="1">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Имя:" Width="150"/>
-                <TextBox Name="txbOwnerName" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding OwnerName, Mode=OneWay}"/>
+                <TextBlock Text="Имя:" Width="150" VerticalAlignment="Center"/>
+                <TextBox Name="txbOwnerName" Width="250" Margin="5, 5, 0, 5"
+                         Text="{Binding OwnerName, Mode=OneWay}" MaxLength="100"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Контактная информация:" Width="150"/>
-                <TextBox Name="txbContactInfo" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding ContactInfo, Mode=OneWay}"/>
+                <TextBlock Text="Контактная информация:" Width="150" 
+                           VerticalAlignment="Center"/>
+                <TextBox Name="txbContactInfo" Width="250" Margin="5, 5, 0, 5"
+                         Text="{Binding ContactInfo, Mode=OneWay}" MaxLength="100"/>
             </StackPanel>
 
             <Button Name="btnSave" Content="Сохранить" Click="btnSave_Click"

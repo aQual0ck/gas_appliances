@@ -18,31 +18,33 @@
             <MenuItem Header="Назад" Click="MenuItem_Click"/>
             <MenuItem Name="menuDel" Header="Удалить" Click="menuDel_Click"/>
         </Menu>
-        <Rectangle Width="350" Height="400" Fill="White" Stroke="#666666" 
-           Grid.Row="1"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" 
-            Grid.Row="1">
+        
+        <StackPanel Margin="10" Grid.Row="1">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Наименование:" Width="150"/>
-                <TextBox Name="txbManufacturerName" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding ManufacturerName, Mode=OneWay}"/>
+                <TextBlock Text="Наименование:" Width="150" VerticalAlignment="Center"/>
+                <TextBox Name="txbManufacturerName" Width="350" Margin="5, 5, 0, 5"
+                         Text="{Binding ManufacturerName, Mode=OneWay}" MaxLength="100"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Тип:" Width="150"/>
-                <ComboBox Name="cmbType" Width="150" Height="20" Margin="5, 5, 0, 5"/>
+                <TextBlock Text="Тип:" Width="150" VerticalAlignment="Center"/>
+                <ComboBox Name="cmbType" Width="75" Margin="5, 5, 0, 5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Контактная информация:" Width="150"/>
-                <TextBox Name="txbContactInfo" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding ContactInfo, Mode=OneWay}"/>
+                <TextBlock Text="Контактная информация:" Width="150" 
+                           VerticalAlignment="Center"/>
+                <TextBox Name="txbContactInfo" Width="250" Margin="5, 5, 0, 5"
+                         Text="{Binding ContactInfo, Mode=OneWay}" MaxLength="100"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Имя представителя:" Width="150"/>
-                <TextBox Name="txbRepName" Width="150" Margin="5, 5, 0, 5"
-                         Text="{Binding RepresentativeName, Mode=OneWay}"/>
+                <TextBlock Text="Имя представителя:" Width="150" 
+                           VerticalAlignment="Center"/>
+                <TextBox Name="txbRepName" Width="250" Margin="5, 5, 0, 5"
+                         Text="{Binding RepresentativeName, Mode=OneWay}" 
+                         MaxLength="100"/>
             </StackPanel>
 
-            <Button Name="btnSave" Content="Сохранить" Click="btnSave_Click">
+            <Button Name="btnSave" Content="Сохранить" Click="btnSave_Click"
+                    Width="75">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="7"/>

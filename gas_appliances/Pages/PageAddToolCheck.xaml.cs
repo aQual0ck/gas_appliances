@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,20 +26,39 @@ namespace gas_appliances.Pages
         private AuxClasses.ToolCheck exam;
         private List<Tool> tool;
         private List<Users> user;
+        private List<string> toolOriginal = new List<string>();
+        private static readonly Regex _regex = new Regex("^[0-9.]+$");
+        private static bool IsInputAllowed(string text)
+        {
+            return !_regex.IsMatch(text);
+        }
         public PageAddToolCheck()
         {
             InitializeComponent();
             cmbTool.SelectedValuePath = "ModelName";
             cmbTool.DisplayMemberPath = "ModelName";
-            cmbTool.ItemsSource = AuxClasses.DBClass.entObj.Tool.ToList();
+            tool = AuxClasses.DBClass.entObj.Tool.ToList();
+            foreach (Tool t in tool)
+            {
+                toolOriginal.Add(t.ModelName);
+                t.ModelName = t.ModelName + " | " + t.SerialNumber;
+            }
+            cmbTool.ItemsSource = tool;
 
             cmbUser.SelectedValuePath = "FullName";
             cmbUser.DisplayMemberPath = "FullName";
-            cmbUser.ItemsSource = AuxClasses.DBClass.entObj.Users.ToList();
+            user = AuxClasses.DBClass.entObj.Users.ToList();
+            cmbUser.ItemsSource = user;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            int id = 0;
+            foreach (Tool t in tool)
+            {
+                t.ModelName = toolOriginal[id];
+                id++;
+            }
             AuxClasses.FrameClass.frmObj.GoBack();
         }
 
@@ -50,8 +70,14 @@ namespace gas_appliances.Pages
             }
             else
             {
-                int toolid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbTool.SelectionBoxItem)["Id"].GetValue(cmbTool.SelectionBoxItem));
-                int userid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbUser.SelectionBoxItem)["Id"].GetValue(cmbUser.SelectionBoxItem));
+                int id = 0;
+                foreach (Tool t in tool)
+                {
+                    t.ModelName = toolOriginal[id];
+                    id++;
+                }
+                int toolid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbTool.SelectedItem)["Id"].GetValue(cmbTool.SelectedItem));
+                int userid = Convert.ToInt32(TypeDescriptor.GetProperties(cmbUser.SelectedItem)["Id"].GetValue(cmbUser.SelectedItem));
                 string dateExam = dpExam.SelectedDate?.ToString(App.DateFormat);
                 DateTime dtExam = DateTime.Parse(dateExam);
 
@@ -64,6 +90,7 @@ namespace gas_appliances.Pages
                 AuxClasses.DBClass.entObj.ToolCheck.Add(exam);
                 AuxClasses.DBClass.entObj.SaveChanges();
                 MessageBox.Show("Добавлено");
+                AuxClasses.FrameClass.frmObj.GoBack();
             }
         }
 
@@ -113,6 +140,11 @@ namespace gas_appliances.Pages
                 foreach (var descendant in FindInputControls(child))
                     yield return descendant;
             }
+        }
+
+        private void dpExam_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsInputAllowed(e.Text);
         }
     }
 }

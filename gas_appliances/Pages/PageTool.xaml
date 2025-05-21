@@ -44,27 +44,33 @@
             <Label Content="В экспл. с"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpOperatingSinceStart" 
-                        SelectedDateChanged="dpOperatingSinceStart_SelectedDateChanged"/>
+                        SelectedDateChanged="dpOperatingSinceStart_SelectedDateChanged"
+                        PreviewTextInput="dpOperatingSinceStart_PreviewTextInput"/>
             <Label Content="до"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpOperatingSinceEnd" 
-                        SelectedDateChanged="dpOperatingSinceEnd_SelectedDateChanged"/>
+                        SelectedDateChanged="dpOperatingSinceEnd_SelectedDateChanged"
+                        PreviewTextInput="dpOperatingSinceEnd_PreviewTextInput"/>
             <Label Content="След. поверка с"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpNextExaminationStart" 
-                        SelectedDateChanged="dpNextExaminationStart_SelectedDateChanged"/>
+                        SelectedDateChanged="dpNextExaminationStart_SelectedDateChanged"
+                        PreviewTextInput="dpNextExaminationStart_PreviewTextInput"/>
             <Label Content="до"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpNextExaminationEnd" 
-                        SelectedDateChanged="dpNextExaminationEnd_SelectedDateChanged"/>
+                        SelectedDateChanged="dpNextExaminationEnd_SelectedDateChanged"
+                        PreviewTextInput="dpNextExaminationEnd_PreviewTextInput"/>
             <Label Content="Списан с"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpDecomissionedSinceStart" 
-                        SelectedDateChanged="dpDecomissionedSinceStart_SelectedDateChanged"/>
+                        SelectedDateChanged="dpDecomissionedSinceStart_SelectedDateChanged"
+                        PreviewTextInput="dpDecomissionedSinceStart_PreviewTextInput"/>
             <Label Content="до"/>
             <DatePicker Width="150" Height="25" Margin="10, 0" 
                         Name="dpDecomissionedSinceEnd" 
-                        SelectedDateChanged="dpDecomissionedSinceEnd_SelectedDateChanged"/>
+                        SelectedDateChanged="dpDecomissionedSinceEnd_SelectedDateChanged"
+                        PreviewTextInput="dpDecomissionedSinceEnd_PreviewTextInput"/>
         </StackPanel>
 
         <DataGrid Name="dgrTools" Grid.Row="3" 
