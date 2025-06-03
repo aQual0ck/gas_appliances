@@ -19,8 +19,7 @@
             <MenuItem Name="menuDel" Header="Удалить" Click="menuDel_Click"/>
         </Menu>
 
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" 
-                    Grid.Row="1">
+        <StackPanel Margin="10" Grid.Row="1">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Категория:" Width="150" VerticalAlignment="Center"/>
                 <ComboBox Name="cmbCategory" Width="150" Margin="5, 5, 0, 5"/>

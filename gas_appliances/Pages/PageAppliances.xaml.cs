@@ -152,7 +152,10 @@ namespace gas_appliances.Pages
 
         private void dgrAppliances_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            AuxClasses.FrameClass.frmObj.Navigate(new PageEditAppliance(dgrAppliances.SelectedItem));
+            if (dgrAppliances.SelectedItem != null)
+            {
+                AuxClasses.FrameClass.frmObj.Navigate(new PageEditAppliance(dgrAppliances.SelectedItem));
+            }
         }
 
         private void menuLogOut_Click(object sender, RoutedEventArgs e)

@@ -1,7 +1,88 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "F:\\source\\gas_appliances\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|f:\\source\\gas_appliances\\gas_appliances\\pages\\pageadminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageadminpanel.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|f:\\source\\gas_appliances\\gas_appliances\\pages\\pagetoolcheck.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pagetoolcheck.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|f:\\source\\gas_appliances\\gas_appliances\\pages\\pagetool.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pagetool.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|f:\\source\\gas_appliances\\gas_appliances\\pages\\pageowners.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageowners.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|f:\\source\\gas_appliances\\gas_appliances\\pages\\pagemanufacturers.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pagemanufacturers.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|f:\\source\\gas_appliances\\gas_appliances\\pages\\pagechecks.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pagechecks.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|f:\\source\\gas_appliances\\gas_appliances\\pages\\pageappliances.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageappliances.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|f:\\source\\gas_appliances\\gas_appliances\\pages\\pageappliances.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageappliances.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\pages\\pageedituser.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageedituser.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|f:\\source\\gas_appliances\\gas_appliances\\pages\\pageeditappliance.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageeditappliance.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\pages\\pageeditmanufacturer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageeditmanufacturer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\pages\\pageedittool.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageedittool.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\pages\\pageeditowner.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageeditowner.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\pages\\pageadduser.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageadduser.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\pages\\pageaddtoolcheck.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageaddtoolcheck.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\pages\\pageaddtool.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageaddtool.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\pages\\pageaddowner.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageaddowner.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\pages\\pageaddmanufacturer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageaddmanufacturer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\pages\\pageaddexam.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageaddexam.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|F:\\source\\gas_appliances\\gas_appliances\\pages\\pageaddappliance.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A83A0A0B-F39A-4D34-8EDD-80A3B5CD5DA3}|gas_appliances\\gas_appliances.csproj|solutionrelative:gas_appliances\\pages\\pageaddappliance.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +90,248 @@
       "DocumentGroups": [
         {
           "DockedWidth": 215,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PageAdminPanel.xaml.cs",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAdminPanel.xaml.cs",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageAdminPanel.xaml.cs",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAdminPanel.xaml.cs",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageAdminPanel.xaml.cs",
+              "ViewState": "AQIAADkAAAAAAAAAAAAowE4AAABfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T07:33:53.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PageToolCheck.xaml.cs",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageToolCheck.xaml.cs",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageToolCheck.xaml.cs",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageToolCheck.xaml.cs",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageToolCheck.xaml.cs",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAowAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T07:32:14.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PageTool.xaml.cs",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageTool.xaml.cs",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageTool.xaml.cs",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageTool.xaml.cs",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageTool.xaml.cs",
+              "ViewState": "AQIAADwAAAAAAAAAAAAowFsAAABfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T07:31:47.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PageOwners.xaml.cs",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageOwners.xaml.cs",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageOwners.xaml.cs",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageOwners.xaml.cs",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageOwners.xaml.cs",
+              "ViewState": "AQIAACQAAAAAAAAAAAAowDQAAABhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T07:31:14.268Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PageManufacturers.xaml.cs",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageManufacturers.xaml.cs",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageManufacturers.xaml.cs",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageManufacturers.xaml.cs",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageManufacturers.xaml.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAowEEAAABvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T07:30:53.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PageChecks.xaml.cs",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageChecks.xaml.cs",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageChecks.xaml.cs",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageChecks.xaml.cs",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageChecks.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T07:30:48.339Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PageAppliances.xaml.cs",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAppliances.xaml.cs",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageAppliances.xaml.cs",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAppliances.xaml.cs",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageAppliances.xaml.cs",
+              "ViewState": "AQIAAI4AAAAAAAAAAAAQwJ4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T07:27:35.82Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PageAppliances.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAppliances.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageAppliances.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAppliances.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageAppliances.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-03T07:27:32.538Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PageEditUser.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageEditUser.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageEditUser.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageEditUser.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageEditUser.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:14:28.032Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PageEditTool.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageEditTool.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageEditTool.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageEditTool.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageEditTool.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:14:26.329Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PageEditOwner.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageEditOwner.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageEditOwner.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageEditOwner.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageEditOwner.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:14:23.974Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PageEditManufacturer.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageEditManufacturer.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageEditManufacturer.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageEditManufacturer.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageEditManufacturer.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:14:22.33Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PageEditAppliance.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageEditAppliance.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageEditAppliance.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageEditAppliance.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageEditAppliance.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:14:20.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PageAddUser.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddUser.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageAddUser.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddUser.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageAddUser.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:14:17.434Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "PageAddToolCheck.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddToolCheck.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageAddToolCheck.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddToolCheck.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageAddToolCheck.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:14:06.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PageAddTool.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddTool.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageAddTool.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddTool.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageAddTool.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:14:02.859Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "PageAddOwner.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddOwner.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageAddOwner.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddOwner.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageAddOwner.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:13:59.774Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "PageAddManufacturer.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddManufacturer.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageAddManufacturer.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddManufacturer.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageAddManufacturer.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:13:57.369Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PageAddExam.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddExam.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageAddExam.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddExam.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageAddExam.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:13:55.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "PageAddAppliance.xaml",
+              "DocumentMoniker": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddAppliance.xaml",
+              "RelativeDocumentMoniker": "gas_appliances\\Pages\\PageAddAppliance.xaml",
+              "ToolTip": "F:\\source\\gas_appliances\\gas_appliances\\Pages\\PageAddAppliance.xaml",
+              "RelativeToolTip": "gas_appliances\\Pages\\PageAddAppliance.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-02T08:13:51.372Z"
             }
           ]
         }

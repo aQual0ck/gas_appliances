@@ -87,7 +87,10 @@ namespace gas_appliances.Pages
 
         private void dgrTools_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            AuxClasses.FrameClass.frmObj.Navigate(new PageEditTool(dgrTools.SelectedItem));
+            if (dgrTools.SelectedItem != null)
+            {
+                AuxClasses.FrameClass.frmObj.Navigate(new PageEditTool(dgrTools.SelectedItem));
+            }
         }
 
         private void ApplyFilters()

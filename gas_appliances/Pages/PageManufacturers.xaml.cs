@@ -61,7 +61,10 @@ namespace gas_appliances.Pages
 
         private void dgrManufacturers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            AuxClasses.FrameClass.frmObj.Navigate(new PageEditManufacturer(dgrManufacturers.SelectedItem));
+            if (dgrManufacturers.SelectedItem != null)
+            {
+                AuxClasses.FrameClass.frmObj.Navigate(new PageEditManufacturer(dgrManufacturers.SelectedItem));
+            }
         }
 
         private int typeid;
